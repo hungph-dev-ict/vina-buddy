@@ -1,0 +1,103 @@
+# =========================
+# OS & Editor
+# =========================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.iml
+
+# =========================
+# Environment & Secrets
+# =========================
+.env
+.env.local
+.env.production
+*.key
+*.pem
+*.p12
+*.jks
+!*.example
+credentials.json
+token.json
+client_secret*.json
+
+# =========================
+# Python / Backend
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+venv/
+.venv/
+env/
+
+# =========================
+# Flutter / Dart
+# =========================
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.packages
+app/build/
+app/.metadata
+app/android/.gradle/
+app/android/local.properties
+app/android/app/debug/
+app/android/app/profile/
+app/android/app/release/
+app/android/key.properties
+app/ios/Pods/
+app/ios/.symlinks/
+app/ios/Flutter/Flutter.framework
+app/ios/Flutter/Generated.xcconfig
+app/ios/Flutter/ephemeral/
+app/ios/Flutter/flutter_export_environment.sh
+*.g.dart
+*.freezed.dart
+
+# =========================
+# Docker
+# =========================
+docker-compose.override.yml
+
+# =========================
+# Ollama
+# =========================
+# Model files are large — don't commit
+*.gguf
+*.bin
+
+# =========================
+# Runtime Data & Storage
+# =========================
+backend/data/*.jsonl
+*.sqlite
+*.sqlite3
+*.db
+
+# =========================
+# Misc
+# =========================
+*.log
+*.tmp
+*.bak
+node_modules/

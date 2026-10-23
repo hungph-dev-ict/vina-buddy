@@ -1,0 +1,177 @@
+{
+  "@@locale": "en",
+  "appName": "Smart Inbox AI",
+  "authTagline": "Personal Gmail triage powered by natural-language AI rules with safe, user-approved label actions.",
+  "zeroPermanentStorageTitle": "Zero Permanent Storage",
+  "zeroPermanentStorageSubtitle": "Full email bodies are never stored or logged.",
+  "labelsOnlyTitle": "Labels Only",
+  "labelsOnlySubtitle": "Never deletes, archives, or sends emails.",
+  "explicitApprovalTitle": "Explicit Approval",
+  "explicitApprovalSubtitle": "You preview and approve every action.",
+  "connectGmail": "Connect Gmail (Google OAuth)",
+  "continueDevMode": "Continue in Dev/Sandbox Mode",
+  "languageEn": "English",
+  "languageVi": "Tiếng Việt",
+  "selectLanguage": "Language",
+  "navInbox": "Inbox",
+  "navBuildRule": "Build Rule",
+  "navMyRules": "My Rules",
+  "inboxFeedTitle": "Inbox Feed",
+  "syncEmails": "Sync Emails",
+  "emailsSynced": "{count} emails synced",
+  "@emailsSynced": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "updatedTime": "Updated: {time}",
+  "@updatedTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "noEmailsFound": "No emails synced yet.",
+  "pullToRefreshHint": "Tap sync or pull to fetch your recent inbox messages.",
+  "userConnected": "User: {email}",
+  "@userConnected": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "disconnect": "Disconnect",
+  "labels": "Labels",
+  "ruleBuilderTitle": "AI Rule Builder",
+  "describeRuleHint": "Describe your inbox rule in plain English or Vietnamese:",
+  "ruleInputPlaceholder": "e.g. Label all emails from substack.com as Newsletters",
+  "analyzeButton": "Convert to Structured Rule",
+  "analyzingButton": "Analyzing Intent...",
+  "presetNewsletters": "Move newsletters to Newsletters label",
+  "presetShopping": "Label emails from amazon.com as Shopping",
+  "presetSecurity": "Label security alerts as Security",
+  "presetInvoices": "Label receipts and invoices as Finance",
+  "generatedRulePreview": "Generated Rule",
+  "ruleName": "Rule Name",
+  "conditions": "Conditions",
+  "targetActions": "Target Actions",
+  "confidenceLevel": "Confidence: {percent}%",
+  "@confidenceLevel": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "previewAndApply": "Preview & Approve Emails",
+  "uncertaintyWarning": "AI confidence is low ({percent}%). Please carefully inspect the rule and preview matches before applying.",
+  "@uncertaintyWarning": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "myRulesTitle": "My Rules",
+  "refreshRules": "Refresh Rules",
+  "noRulesConfigured": "No rules configured yet.",
+  "noRulesSubtitle": "Create your first rule using plain English.",
+  "createRuleButton": "Create Rule",
+  "previewRule": "Preview Rule",
+  "ruleActive": "Active",
+  "ruleDisabled": "Disabled",
+  "deleteRule": "Delete Rule",
+  "deleteRuleConfirmTitle": "Delete Rule",
+  "deleteRuleConfirmContent": "Are you sure you want to delete this rule?",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "previewTitle": "Rule Match Preview",
+  "previewSubtitle": "Review emails matching this rule before applying changes.",
+  "matchedEmails": "Matched Emails ({count})",
+  "@matchedEmails": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noEmailsMatched": "No emails matched this rule.",
+  "approveAndApply": "Approve & Apply ({count})",
+  "@approveAndApply": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "applyingChanges": "Applying changes...",
+  "confirmApplyTitle": "Confirm Label Application",
+  "confirmApplyContent": "Apply labels to {count} approved email(s)?\n\nNo emails will be deleted or sent.",
+  "@confirmApplyContent": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "applySuccessTitle": "Actions Applied",
+  "applySuccessContent": "Successfully applied labels to {count} email(s).",
+  "@applySuccessContent": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "close": "Close",
+  "statusSuccess": "Success",
+  "selectAll": "Select All",
+  "deselectAll": "Deselect All",
+  "subjectPrefix": "Subject: {subject}",
+  "@subjectPrefix": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      }
+    }
+  },
+  "fromPrefix": "From: {from}",
+  "@fromPrefix": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      }
+    }
+  },
+  "reportToAdmin": "Report to Admin",
+  "reportToAdminTitle": "Submit Report to Admin",
+  "reportToAdminDesc": "This request is not currently supported. You can send a report to the admin for manual review.",
+  "reportInputLabel": "Request content:",
+  "reportNotesLabel": "Additional notes (optional):",
+  "reportNotesHint": "Describe what you need or why you requested this...",
+  "reportSubmit": "Submit Report",
+  "reportSubmitting": "Submitting...",
+  "reportSuccess": "Report submitted to admin successfully!",
+  "unsupportedContentNotice": "This content cannot be supported, please submit a report to the admin.",
+  "multipleRulesGenerated": "Separated into {count} independent rules",
+  "@multipleRulesGenerated": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ruleIndex": "Rule #{index}",
+  "@ruleIndex": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  }
+}
+
