@@ -73,6 +73,8 @@ app/ios/Flutter/ephemeral/
 app/ios/Flutter/flutter_export_environment.sh
 *.g.dart
 *.freezed.dart
+*.apk
+*.aab
 
 # =========================
 # Docker
