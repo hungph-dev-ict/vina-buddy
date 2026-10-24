@@ -1,0 +1,23 @@
+{
+  "capability_type": "reminder",
+  "name": "Nền tảng Nhắc nhở Tự động vnverse (Core Reminder Platform)",
+  "execution_mode": {
+    "in_app_chat": true,
+    "device_notification": true,
+    "background_worker_24_7": true
+  },
+  "system_description": "Khả năng lên lịch và tự động gửi tin nhắn hội thoại trực tiếp trong khung chat vnverse, đồng thời kích hoạt thông báo đẩy (push/local notification) trên thiết bị người dùng vào đúng thời điểm đã hẹn.",
+  "system_limitations": [
+    "CHỈ hoạt động trong phạm vi ứng dụng vnverse: gửi tin nhắn chat và thông báo thiết bị.",
+    "TUYỆT ĐỐI KHÔNG đọc, quét, đồng bộ hoặc can thiệp vào các ứng dụng lịch bên ngoài (Google Calendar, Apple Calendar, Outlook Calendar).",
+    "TUYỆT ĐỐI KHÔNG gọi điện thoại tự động, không gửi tin nhắn SMS viễn thông.",
+    "TUYỆT ĐỐI KHÔNG tự ý chỉnh sửa lịch trình nếu chưa được Giám đốc xác nhận qua hội thoại."
+  ],
+  "common_schedule_types": [
+    "lunar_monthly",
+    "lunar_yearly",
+    "solar_weekly",
+    "solar_monthly",
+    "solar_once"
+  ]
+}
