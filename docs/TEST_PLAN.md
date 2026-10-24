@@ -1,4 +1,4 @@
-# Smart Inbox AI — Test Plan
+# Vina Buddy — Test Plan
 
 ## 1. Testing Strategy Overview
 

@@ -95,3 +95,27 @@ class OllamaProvider:
             raise LLMValidationError(
                 f"Ollama response could not be parsed as JSON: {exc}"
             ) from exc
+
+    async def _send_prompt(self, prompt: str) -> str:
+        """Send direct prompt to Ollama and return raw text response."""
+        payload = {
+            "model": self.model,
+            "messages": [
+                {"role": "user", "content": prompt},
+            ],
+            "stream": False,
+            "options": {"temperature": 0.1},
+        }
+        try:
+            async with httpx.AsyncClient(timeout=self.timeout) as client:
+                response = await client.post(
+                    f"{self.base_url}/api/chat",
+                    json=payload,
+                )
+                if response.status_code == 200:
+                    data = response.json()
+                    return data.get("message", {}).get("content", "").strip()
+                raise LLMProviderError(f"Ollama HTTP {response.status_code}")
+        except Exception as exc:
+            raise LLMProviderError(f"Ollama prompt error: {exc}") from exc
+

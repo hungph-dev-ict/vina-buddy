@@ -1,7 +1,7 @@
-# Smart Inbox AI — Gemini Configuration
+# Vina Buddy — Gemini Configuration
 
 ## Project Overview
-Smart Inbox AI: Android PoC for AI-assisted Gmail inbox management with natural language rules.
+Vina Buddy: Android PoC for AI-assisted Gmail inbox management with natural language rules.
 
 ## Key Files
 - `progress.md` — Current status and next actions

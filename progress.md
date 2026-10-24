@@ -1,6 +1,5 @@
-# Smart Inbox AI — Progress Tracker
-
-## Current Phase: 11 — Official Release v1.0.0 Pushed to Git (Complete ✅)
+# Vina Buddy — Progress Tracker
+## Current Phase: 34 — Fix Assistant Chat Freeze, 3-Intent Coordinator & Widget Tests (Complete ✅)
 
 | Date | Phase | Status | Notes |
 |------|-------|--------|-------|
@@ -12,8 +11,32 @@
 | 2026-10-23 | 05–07 — App & Android Packaging | ✅ Complete | Complete Flutter UI implemented (Onboarding, Inbox feed, Rule Builder, Preview/Apply approval sheet, Rule management), all 39 tests passing, Debug & Release APKs compiled and verified. |
 | 2026-10-23 | 08 — Localization (EN & VI) | ✅ Complete | Bi-lingual support (English & Vietnamese) with flutter_localizations, Riverpod localeProvider, UI Language Selector, full ARB dictionaries, and localized widget & unit tests. |
 | 2026-10-23 | 09 — Multi-Intent & Admin Reports | ✅ Complete | Separate compound rule intents into independent rules (condition 1 -> label 1, condition 2 -> label 2), reject out-of-scope non-email requests with exact Vietnamese guidance, and Admin Report logging to server file. |
-| 2026-10-24 | 10 — UI/UX Design System & Redesign | ✅ Complete | Full design system documentation (`UI_UX_GUIDELINES.md`, `DESIGN_SYSTEM.md`, `UI_UX_REVIEW_CHECKLIST.md`), centralized Flutter tokens, reusable component library, redesigned screens, 19 widget/unit tests passing, live verification on Android emulator (`emulator-5554`), Debug & Release APKs compiled. |
+| 2026-10-24 | 10 — UI/UX Design System & Redesign | ✅ Complete | Full design system documentation, centralized Flutter tokens, reusable component library, redesigned screens. |
 | 2026-10-24 | 11 — Release v1.0.0 | ✅ Complete | Clean git commit and push to remote `main` branch. Release v1.0.0 tagged with business-focused change log. |
+| 2026-10-24 | 12 — Mobile-Design Home Screen Redesign | ✅ Complete | Adaptive Material 3 (Android) and Apple HIG (iOS) Home Screen (`inbox_screen.dart`, `main_navigation_screen.dart`, `email_card.dart`), live platform toggle, verified on running Android 16 emulator (`emulator-5554`), 20 Flutter tests passing. |
+| 2026-10-24 | 13 — Conversational Pivot & 2-Tab Navigation | ✅ Complete | Pivoted VinaBuddy to Conversational Email Assistant (`POST /api/v1/assistant/chat`). Removed redundant Rule Builder tab. Streamlined bottom bar to 2 tabs (Trợ lý / Assistant & Quy tắc của tôi / My Rules). Verified on Android emulator. All 45 backend & 23 Flutter tests passing. |
+| 2026-10-24 | 14 — Personal & Settings Screen | ✅ Complete | Added Tab 3 "Personal" (`personal_screen.dart`) with profile avatar & email, Google OAuth/Sandbox status, reactive Light/Dark/System theme switcher (`themeModeProvider`), reactive Language switcher (`localeProvider`), and Privacy & Security guarantees. Verified on emulator. 26 Flutter tests passing. |
+| 2026-10-24 | 15 — Physical Device Connectivity & Dynamic Server URL | ✅ Complete | Solved `10.0.2.2` emulator loopback socket exception on physical phones. Added INTERNET & Cleartext HTTP permissions in AndroidManifest. Added dynamic `serverUrlProvider`, AuthScreen & PersonalScreen server URL switcher dialog with Test Connection ping, and fallback offline sandbox bypass. Recompiled release APK. |
+| 2026-10-24 | 16 — Disentangle Auth Loading & Distinct Account Flows | ✅ Complete | Split shared `isLoading` into `isGoogleLoading` and `isDevLoading` so only the pressed button spins. Added `_showConnectGmailDialog` in AuthScreen allowing user to connect with their personal email address in PoC mode. Dedicated Dev Mode to `dev.sandbox@vinabuddy.ai`. Recompiled release APK. |
+| 2026-10-24 | 17 — Conversational Rule Builder & LLM Classification Monitor | ✅ Complete | Redesigned label workflow: tapping "Gán nhãn email" prompts user for rule description with examples. Parsing natural language rules adds and saves them directly to My Rules (`rules_service`). Rejects invalid or out-of-scope non-rules with helpful guidance. Added dev monitor banner to all assistant responses showing classified intent group, confidence percentage, and provider/model. Added UI Dev badge in chat bubble. 48 backend & 26 Flutter tests passing. |
+| 2026-10-24 | 18 — Authentic Google SSO (OAuth 2.0 Web Flow) & Real Gmail API | ✅ Complete | Implemented authentic Google OAuth 2.0 consent & web flow (`GET /auth/google/url`, `GET /auth/google/callback`, `GET /auth/google/poll`, `POST /auth/google/config`). Integrated real Google Gmail API in `gmail_service.py` to fetch real message headers/snippets (`gmail.googleapis.com/v1/users/me/messages`), create/read real Gmail labels (`users/me/labels`), and modify labels on real messages (`users/me/messages/{id}/modify`). Added Android deep link `vinabuddy://auth` and in-app OAuth configuration setup. 50 backend & 26 Flutter tests passing. Recompiled release APK. |
+| 2026-10-24 | 19 — Strict LLM Boundary & Confidence JSON Headers | ✅ Complete | Enforced strict 2-step LLM boundary: (1) Call 1 on user input classifies into 4 intents (`stats`, `classify`, `label`, `other`) with confidence scores JSON output at top of reply; (2) Hardcoded fixed response when user selects label; (3) Call 2 on rule input validates `is_valid_rule: true | false`, condition & label JSON at top of reply; (4) Zero LLM calls for inbox operations (100% deterministic code tools). 51 backend tests & 26 Flutter tests passing. Recompiled release APK. |
+| 2026-10-24 | 20 — Production Google SSO Credentials & Zero-Config Mobile Flow | ✅ Complete | Ingested genuine Web OAuth credentials (`548888108664-ai02lqldvrsam9lamdeq5c81h8ga9h4b...` & `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`) in `backend/.env`. Removed manual credential dialog `_showGoogleOAuthConfigDialog` completely from mobile UI. Users directly tap 'Connect Gmail' to launch Google SSO. All 26 Flutter & 51 backend tests pass. Recompiled release APK. |
+| 2026-10-24 | 21 — Cloudflare HTTPS Public Tunnel for Real Android Wi-Fi SSO | ✅ Complete | Launched persistent Cloudflare Tunnel (`bass-toll-displays-emacs.trycloudflare.com`) routing to local backend on port 8000. Configured `GOOGLE_REDIRECT_URI` in `.env` to public HTTPS domain. Set Flutter `defaultApiBaseUrl` to tunnel URL for cable-free Wi-Fi/4G testing on physical Android devices. Recompiled release APK. |
+| 2026-10-24 | 22 — Fix OAuth Token Exchange Redirect URI Mismatch | ✅ Complete | Eliminated hardcoded localhost redirect_uri in `google_callback`. Dynamically extract matched redirect URI from `settings.GOOGLE_REDIRECT_URI` or `request.url`. Enhanced Google token error inspection. Reloaded backend server. |
+| 2026-10-24 | 23 — Fix Post-Login Dialog Stack Mismatch | ✅ Complete | Identified dialog dismissal popping root route. Replaced with rootNavigator check. |
+| 2026-10-24 | 24 — Resolve Deep Link Navigator Black Screen | ✅ Complete | Disabled Flutter automatic deep-link routing (`flutter_deeplinking_enabled: false`) in AndroidManifest. Overrode `onNewIntent` in MainActivity. Added `appNavigatorKey.currentState?.pushAndRemoveUntil` and `KeyedSubtree` to cleanly purge Navigator stack and present `MainNavigationScreen`. Replaced DecoratedBox ListTile with Row in PersonalScreen. All 51 backend & 27 Flutter tests passing. Recompiled release APK. |
+| 2026-10-24 | 25 — Wire Live Gmail API into Conversational Assistant | ✅ Complete | Extracted Authorization Bearer token in `POST /assistant/chat`. Passed live Google OAuth access_token to `get_inbox_statistics`, `get_inbox_classification`, and `preview_rule`. Purged mock synthetic fixtures on live fetch. Tested with 52 backend & 27 mobile tests. |
+| 2026-10-24 | 26 — Eliminate Silent Dummy Fallback & Persist Google Sessions | ✅ Complete | Persisted sessions and tokens to disk (`.sessions_store.json`) across uvicorn reloads. Added auto-refresh for Google access tokens using refresh_token. Completely eliminated silent dummy email fallback on live Google accounts. Surfaced actionable Gmail API activation URL with direct link for project 548888108664. All 52 backend and 27 Flutter tests pass. |
+| 2026-10-24 | 27 — Transformation into vnverse | ✅ Complete | Transformed product into `vnverse` virtual office. Hierarchy established: User as Giám đốc, Coordinator as Trợ lý Giám đốc, creator as Bộ trưởng vnverse, and first specialist Thầy Cúng with 3 capabilities. Added Friends tab, Recruitment Market, dedicated Agent Chat, on-device local storage persistence, out-of-scope handoff routing, and 100% Vietnamese tone. 56 backend tests and 44 Flutter tests passing. |
+| 2026-10-24 | 28 — Chat Harmonization, Dismissal Flow & Static Config | ✅ Complete | 1) Dynamic Tab 0 title matching assistant name. 2) Tab 1 renamed to 'Nhân viên'. 3) Assistant chat bubbles & pill input bar harmonized with employee chat. 4) Staff dismissal with chat history retention, input guard banner, and show/hide toggle. 5) In-app server URL UI removed; clear uncommentable backend environments in constants.dart for Android emulator, real device via Ngrok, and localhost. 57 backend & 48 Flutter tests pass (0 analyzer warnings). |
+| 2026-10-24 | 29 — Modular Agent Structure & Dynamic LLM Scope Classification | ✅ Complete | 1) Modular agent directory pattern (`backend/app/agents/<agent_name>/` and `app/lib/agents/<agent_name>/`) where adding new agents requires only copying folder with `definition.json`, `system_prompt.txt`, and `handler.py`. 2) Dynamic LLM intent & scope classification replacing hardcoded heuristics. 3) Cross-agent capability routing via Coordinator and escalation to 'Bộ trưởng vnverse'. 4) Permission gate on Recruitment Market checking required permissions (e.g. Gmail) before hiring. 60 backend & 48 Flutter tests pass. |
+| 2026-10-24 | 30 — Fix Null Subtype Error in FriendsScreen & Widget Tests | ✅ Complete | Diagnosed and resolved `type 'Null' is not a subtype of type 'bool' of 'function result'` occurring in `RecruitedAgent.isDismissed` when hot-reloading legacy in-memory heap instances. Made `_isDismissed` nullable backing field with safe fallback getter (`_isDismissed ?? false`), added defensive comparison `a.isDismissed != true` in `friends_screen.dart`, executed hot restart via DTD MCP, and authored 3 new widget tests covering legacy deserialization, empty state navigation, and employee renaming (51/51 Flutter tests passing). |
+| 2026-10-24 | 31 — Dynamic Capability Scoring Header & Workplace Prayers | ✅ Complete | 1) Dynamic AI Dev Monitor header scoring query against agent's specific defined capabilities (`traditional_offerings_and_prayers`, `lunar_day_reminder`, `vietnamese_traditional_holidays`, `other`) instead of hardcoded Gmail categories. 2) Thầy Cúng handles 'bài cúng cho dự án đang cháy' as `traditional_offerings_and_prayers` (0.95 score) delivering dedicated văn khấn Thần Code / Thần Cloud / Thần Mạng. 3) Coordinator fallback scans all platform agent skills dynamically and escalates out-of-company tasks to Bộ trưởng vnverse. All 61 backend & 52 Flutter tests passing. |
+| 2026-10-24 | 32 — Purge Hardcoded Frontend ThayCungKnowledgeEngine | ✅ Complete | Completely removed `thay_cung_knowledge_engine.dart` and `thay_cung_knowledge_engine_test.dart` from the mobile project. Cleaned `app_providers.dart` so `AgentChatNotifier` uses a purely generic, agnostic network communication & error handling pattern. No agent-specific logic remains on frontend. Ran `flutter analyze` (0 warnings) and `flutter test` (all 46 tests passing). |
+| 2026-10-24 | 33 — Cultural Holiday Knowledge Engine & Agent Chat Widget Test | ✅ Complete | 1) Diagnosed and fixed missing handler branch for `vietnamese_traditional_holidays` in `backend/app/agents/thay_cung/handler.py`. Thầy Cúng now delivers rich, culturally accurate responses for Tết Đoan Ngọ (Mùng 5/5 Âm, diệt sâu bọ, cơm rượu nếp, mận hậu), Tết Hàn Thực, Vu Lan, Trung Thu, Ông Công Ông Táo, Giỗ Tổ Hùng Vương thay vì rơi xuống câu chào mặc định. 2) Added backend test `test_assistant_chat_thay_cung_tet_doan_ngo_answers_cultural_holiday` (62/62 passed). 3) Implemented `/flutter-add-widget-test` in `app/test/widget/agent_chat_screen_test.dart` asserting input flow, chat bubble rendering, and AI Dev Monitor capability header (all 47 Flutter tests passed). |
+| 2026-10-24 | 34 — Fix Assistant Freeze, 3-Intent Coordinator & Widget Tests | ✅ Complete | 1) Diagnosed and resolved assistant freeze root causes (expired Cloudflare tunnel URL, missing HTTP timeout, and riverpod watch bug on recruitment button). 2) Re-aligned Assistant Coordinator to 3 core intents (`recommend_agent`, `chitchat`, `out_of_scope` for politics/ethics). 3) Created `app/test/widget/chat_assistant_screen_test.dart` with 7 comprehensive widget tests (all passing). 4) 20/20 backend tests, 61/61 Flutter tests passing, hot reloaded on Android emulator. |
+
 
 ---
 
@@ -205,4 +228,122 @@ tests/test_rules_service.py::test_rule_crud_operations PASSED            [100%]
 - **Backend**: Endpoint logs complaints to a server file for manual inspection (`backend/data/admin_reports.jsonl`). Contains timestamp, report ID, user input, optional user notes, and IP address.
 - **Mobile UI**: `AdminReportDialog` allows the user to review the rejected input, write optional notes, and submit directly to the server.
 - **Multilingual**: Fully localized into English and Vietnamese (`app/lib/l10n/app_en.arb`, `app_vi.arb`).
+
+---
+
+## Phase 10 — VinaBuddy Conversational Assistant & Strict LLM Boundaries
+
+### 1. Vision & Architectural Pivot
+- **Core Concept**: Shifted from an email reader/feed client into a privacy-first **VinaBuddy AI Assistant**.
+- **Privacy Assurance**: The app **does not render customer email feeds**. Instead, users interact with the assistant via chat and structured overview summaries.
+- **Strict LLM Boundary**:
+  - LLM only performs **Intent Classification & Parameter Extraction**.
+  - Exactly 3 supported features:
+    1. `stats`: Email statistics (inbox total, unread counts, top senders, category breakdown).
+    2. `classify`: Email smart categorization with description & sample senders.
+    3. `label`: Natural language rule creation and preview proposal with explicit user approval required.
+    4. `other`: Rejects out-of-scope queries (weather, general QA, or unsupported delete/send operations) and presents **3 quick action buttons**.
+
+### 2. Backend Implementation
+- `backend/app/schemas/assistant.py`: `AssistantIntent`, `EmailStatsPayload`, `EmailClassifyPayload`, `CleanupProposalPayload`, `ChatRequest`, and `ChatResponse`.
+- `backend/app/services/gmail_service.py`: Added deterministic `get_inbox_statistics()` and `get_inbox_classification()` methods that safely aggregate metadata without exposing email bodies.
+- `backend/app/services/assistant_service.py`: LLM intent classifier prompt with resilient heuristics, tool dispatching, and fallback rule caching.
+- `backend/app/routers/assistant.py`: `POST /api/v1/assistant/chat` endpoint.
+- `backend/tests/test_assistant.py`: 5 automated tests verifying intent classification, payload generation, and rejection boundaries (45/45 backend pytest tests passing).
+
+### 3. Flutter Mobile Implementation
+- `app/lib/models/assistant_chat.dart`: Typed models for chat stream, statistics data, category classification, and cleanup proposals.
+- `app/lib/services/api_service.dart`: Added `sendAssistantMessage` method.
+- `app/lib/providers/app_providers.dart`: Added `ChatAssistantNotifier` and `chatAssistantProvider`.
+- `app/lib/screens/chat_assistant_screen.dart`: Rich conversational UI featuring:
+  - Header with VinaBuddy avatar, online status indicator, and instant language switch (EN/VI).
+  - 3 prominent action shortcut chips: `📊 Thống kê email`, `📁 Phân loại email`, `🏷️ Gắn nhãn email`.
+  - In-chat interactive cards:
+    - `StatsCardWidget`: Total/unread metric cards, category distribution with color dots, top senders ranking.
+    - `ClassificationCardWidget`: Category breakdown cards with email counts and sample senders.
+    - `ProposalCardWidget`: Labeling proposal with preview matching count, sample subjects, and **"Phê duyệt & Áp dụng" (Approve & Apply)** button.
+- `app/lib/screens/main_navigation_screen.dart`: `ChatAssistantScreen` placed as central Home tab (Tab 0).
+- Localized in English & Vietnamese (`app_en.arb`, `app_vi.arb`).
+- 23/23 Flutter tests passing with 0 analyze issues.
+
+## Phase 28: Refine vnverse Coordinator, Market Recruitment Filtering & Spiritual Intent Routing
+
+### Summary of Enhancements:
+1. **Trợ lý Điều phối vnverse (`chat_assistant_screen.dart`)**:
+   - Bỏ toàn bộ các nút/gợi ý liên quan đến email (Thống kê email, Phân loại email, Gắn nhãn email) - dành riêng cho Thư ký Email sắp ra mắt.
+   - Bổ sung phím tắt Điều phối vnverse: `Tra cứu ngày cúng 🏮`, `Chợ tuyển dụng 🎪`, `Danh sách nhân sự 👥`.
+   - Cập nhật thông điệp trạng thái hệ thống thành `vnverse đang xử lý yêu cầu...`.
+
+2. **Chợ tuyển dụng (`recruitment_market_screen.dart`)**:
+   - Lọc hoàn toàn các nhân sự đã được tuyển (`where(!recruitedAgents.any(...))`), không hiển thị lại trên Chợ.
+   - Thêm trạng thái chúc mừng khi Giám đốc đã chiêu mộ toàn bộ nhân sự trên thị trường (`Đã chiêu mộ toàn bộ nhân sự!`).
+
+3. **Màn hình Thầy Cúng (`agent_chat_screen.dart`)**:
+   - Bỏ chip gợi ý `Dọn hộp thư Gmail` và các icon cảnh báo; toàn bộ chip gợi ý tập trung 100% vào nghiệp vụ tâm linh/văn hoá công sở chuẩn mực.
+
+4. **Luồng phân loại Intent & Điều chuyển Nhân sự (Handoff)**:
+   - Khi Giám đốc ra lệnh ngoài phạm vi cho Thầy Cúng (ví dụ: "dọn cho tôi email"):
+     - Thầy Cúng phân loại out-of-scope và gửi sang Trợ lý điều phối.
+     - Trợ lý nhận diện intent "dọn email", tra cứu Chợ tuyển dụng thấy có `thu_ky_email` (`Thư ký Email`) và hướng dẫn Giám đốc tuyển Thư ký Email.
+     - Nếu yêu cầu là skill công ty chưa có (đặt vé máy bay, khách sạn, gym...): báo rõ "skill này em không có, để bảo Bộ trưởng chiêu mộ thêm nhân tài nước ngoài".
+   - Đồng bộ logic xử lý ở cả backend (`assistant_service.py`) và on-device engine (`thay_cung_knowledge_engine.dart` & `app_providers.dart`).
+
+### Quality Gates & Verification:
+- **Backend Tests**: 57/57 pytest passed (`.venv/bin/pytest tests/ -v`).
+- **Mobile Tests**: 45/45 Flutter tests passed (`flutter test`).
+- **Static Analysis**: `flutter analyze` completed with 0 errors / 0 warnings.
+- **Code Formatting**: `dart format lib test` formatted cleanly.
+
+## Phase 29: Autonomous 24/24 Background Agents & Multi-Turn Interactive Reminders
+
+### Summary of Enhancements:
+1. **Kiến Trúc Hai Tầng (Two-Tier Capability Architecture)**:
+   - **Tầng Hệ thống (Platform-Level System Capability)**: Tạo `backend/app/platform/capabilities/reminder_definition.json` định nghĩa chuẩn năng lực `reminder` cho toàn hệ sinh thái vnverse (chế độ chạy: in-app chat bubble, local device notification; giới hạn nghiêm ngặt: KHÔNG đồng bộ Google/Apple Calendar, KHÔNG gửi SMS/gọi điện).
+   - **Tầng Nhân sự (Agent-Level Customization)**: Cấu hình `reminder` trong `backend/app/agents/thay_cung/definition.json` với `required_fields` (`days`, `target_time`) và `optional_fields` (`occasion` như "Sóc vọng", "Giỗ cụ"), kèm quick options.
+   - **LLM Intent & Boundary Classification**: LLM phân loại chính xác các yêu cầu đặt lịch tâm linh (mùng 1, rằm, ngày giỗ) vào năng lực `reminder`; các yêu cầu ngoài giới hạn (đọc Google Calendar, đặt lịch họp chung) bị phân loại `other = 0.98` và từ chối/điều chuyển rõ ràng.
+
+2. **Dịch Vụ & API Lập Lịch Chạy Ngầm (Reminders Engine)**:
+   - `backend/app/schemas/reminders.py`: Pydantic models `ReminderSchedule`, `ReminderCreate`, `ReminderUpdate`, `ReminderResponse`, `ReminderTestRunResponse`.
+   - `backend/app/services/reminders_service.py`: Lưu trữ tự chủ (`.reminders_store.json`), seed sẵn lịch nhắc sóc vọng mặc định cho Thầy Cúng, hỗ trợ CRUD, bật/tắt (toggle) và chạy thử ngay lập tức (`execute_test_run`).
+   - `backend/app/routers/reminders.py`: REST API endpoints đầy đủ (`GET/POST /api/v1/agents/{id}/reminders`, `GET/PATCH/DELETE /api/v1/reminders/{id}`, `POST /api/v1/reminders/{id}/test-run`).
+
+3. **Giao Diện Hội Thoại Tương Tác Nhiều Lựa Chọn (Interactive Multi-Checkbox Chat Widget)**:
+   - Khi Giám đốc yêu cầu nhắc nhở, Thầy Cúng trả về bong bóng chat kèm khối tương tác `InteractiveConfigPrompt`.
+   - Render multi-checkbox trực quan: `[x] Mùng 1 Âm lịch`, `[x] Ngày rằm (15) Âm lịch`, `[ ] Ngày khác tuỳ chọn`, cùng nút `Xác nhận lịch nhắc`.
+   - Cho phép chọn/bỏ chọn trực tiếp trên bong bóng chat và gửi xác nhận tức thì.
+
+4. **Quản Lý Tác Vụ Chạy Ngầm Trên Màn Hình Nhân Viên (`AgentRemindersSheet`)**:
+   - Trên mỗi thẻ nhân viên trong `FriendsScreen`, hiển thị badge `⚡ Lịch nhắc 24/24` và menu item `Lịch nhắc nhở (24/24)`.
+   - Mở Bottom Sheet Material 3 hiển thị toàn bộ tác vụ chạy ngầm của nhân viên:
+     - Banner thông báo cơ chế tự chủ 24/24.
+     - Switch bật/tắt kích hoạt tác vụ.
+     - Nút `⚡ Chạy thử ngay` gọi API test-run và phản hồi Toast kết quả.
+     - Nút xoá tác vụ kèm hộp thoại xác nhận.
+     - Nút `Thêm lịch nhắc thủ công` cho phép chọn giờ và ngày sóc vọng/giỗ chạp.
+
+### Quality Gates & Verification:
+- **Backend Tests**: 67/67 pytest passed (`.venv/bin/pytest tests/ -v`). Đã thêm 5 tests mới trong `backend/tests/test_reminders.py`.
+- **Mobile Tests**: 61/61 Flutter tests passed (`flutter test`). Đã thêm test unit `reminder_model_test.dart` và 2 test widget `agent_reminders_sheet_test.dart`, `interactive_checkbox_chat_test.dart`.
+- **Static Analysis**: `flutter analyze` completed with 0 errors / 0 warnings.
+
+## Phase 30: Slot-Filling for Custom Reminders & Dynamic Lunar Date Parsing
+
+### Summary of Fixes & Enhancements:
+1. **Dynamic Slot-Filling cho Reminder (Chỉ bắt buộc Date, Time & Occasion là Optional)**:
+   - Trong `definition.json`, chuẩn hoá `required_fields: ["date"]`, các trường `occasion`, `time`, `notes` là `optional_fields`.
+   - Khi người dùng chưa nhập ngày, Thầy Cúng chỉ hỏi duy nhất ngày âm lịch một cách tự nhiên và ngắn gọn, không hỏi liệt kê 3 câu hỏi rườm rà.
+   - Khi người dùng phản hồi dạng ngắn gọn như `giỗ cụ 10/24 lúc 2:04` hoặc `10/24`:
+     - Tự động nhận diện `date = 10/24` (day 24, month 10).
+     - Tự động nhận diện `occasion = Giỗ cụ`.
+     - Tự động nhận diện `time = 02:04` (nếu không có thì mặc định `07:00`).
+     - Xác nhận ngay: *"Dạ thưa Giám đốc! Thầy đã cài đặt lịch nhắc nhở ngày 10/24 Âm lịch (dịp Giỗ cụ) vào lúc 02:04 cho sếp rồi ạ!"*.
+2. **Cập nhật nhận diện Intent Scope cho câu trả lời Slot-Filling**:
+   - Bổ sung quy tắc trong `base_agent.py` và `definition.json` để các câu trả lời slot-filling ngắn (ví dụ: `giỗ cụ 10/24 lúc 2:04`, `10/24`) được phân loại đúng vào `reminder` của Thầy Cúng (không bị đánh giá nhầm là out-of-scope).
+3. **Bộ bóc tách linh hoạt ngày âm (`_parse_lunar_date`, `_parse_occasion`, `_parse_target_time`)**:
+   - Hỗ trợ đảo vị trí ngày/tháng thông minh (`10/24` -> ngày 24 tháng 10, `24/10` -> ngày 24 tháng 10, `15/3` -> ngày 15 tháng 3).
+   - Hỗ trợ giờ 12h/24h và thời gian buổi chiều/tối (`2:04` -> `02:04`, `2h chiều` -> `14:00`).
+4. **Tests & Verification**:
+   - Thêm test `test_thay_cung_dynamic_slot_filling_with_short_user_answer` trong `backend/tests/test_reminders.py`.
+   - **Backend Tests**: 73/73 tests passed (`.venv/bin/pytest tests/ -q`).
+   - **Flutter Tests**: 61/61 tests passed (`flutter test`).
 

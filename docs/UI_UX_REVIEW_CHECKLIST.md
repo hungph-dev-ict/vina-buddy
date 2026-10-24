@@ -1,6 +1,6 @@
-# Smart Inbox AI — UI/UX Review Checklist
+# Vina Buddy — UI/UX Review Checklist
 
-This checklist is used to evaluate every screen, modal, and interactive state in the Smart Inbox AI application to maintain production-grade quality, accessibility, and visual harmony.
+This checklist is used to evaluate every screen, modal, and interactive state in the Vina Buddy application to maintain production-grade quality, accessibility, and visual harmony.
 
 ---
 

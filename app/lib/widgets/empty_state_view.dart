@@ -34,10 +34,14 @@ class EmptyStateView extends StatelessWidget {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: isDark ? AppColors.surfaceContainerDark : AppColors.primaryContainerLight,
+                color: isDark
+                    ? AppColors.surfaceContainerDark
+                    : AppColors.primaryContainerLight,
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: isDark ? AppColors.outlineDark : AppColors.outlineLight,
+                  color: isDark
+                      ? AppColors.outlineDark
+                      : AppColors.outlineLight,
                   width: 1.5,
                 ),
               ),
@@ -51,18 +55,19 @@ class EmptyStateView extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
+              style: Theme.of(context).textTheme.titleLarge
+                  ?.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: AppSpacing.sm),
             Text(
               subtitle,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-                    height: 1.45,
-                  ),
+                color: isDark
+                    ? AppColors.textSecondaryDark
+                    : AppColors.textSecondaryLight,
+                height: 1.45,
+              ),
             ),
             if (buttonLabel != null && onButtonPressed != null) ...[
               const SizedBox(height: AppSpacing.xl),

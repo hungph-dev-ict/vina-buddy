@@ -55,25 +55,29 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
       l10n?.presetInvoices ?? 'Label receipts and invoices as Finance',
     ];
 
-    final isUnsupported = rulesState.errorMessage != null &&
+    final isUnsupported =
+        rulesState.errorMessage != null &&
         (rulesState.errorMessage!.toLowerCase().contains('không thể hỗ trợ') ||
             rulesState.errorMessage!.toLowerCase().contains('admin') ||
             rulesState.errorMessage!.toLowerCase().contains('unsupported'));
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n?.ruleBuilderTitle ?? 'AI Rule Builder'),
-      ),
+      appBar: AppBar(title: Text(l10n?.ruleBuilderTitle ?? 'AI Rule Builder')),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.md),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.lg,
+          vertical: AppSpacing.md,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Instruction Card
             AppCard(
               padding: const EdgeInsets.all(AppSpacing.md),
-              backgroundColor: isDark ? AppColors.surfaceContainerDark : AppColors.primaryContainerLight,
+              backgroundColor: isDark
+                  ? AppColors.surfaceContainerDark
+                  : AppColors.primaryContainerLight,
               borderColor: isDark
                   ? AppColors.primaryDark.withValues(alpha: 0.25)
                   : AppColors.primaryLight.withValues(alpha: 0.2),
@@ -82,17 +86,20 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
                   Icon(
                     Icons.auto_awesome_rounded,
                     size: 20,
-                    color: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+                    color: isDark
+                        ? AppColors.primaryDark
+                        : AppColors.primaryLight,
                   ),
                   const SizedBox(width: AppSpacing.sm),
                   Expanded(
                     child: Text(
-                      l10n?.describeRuleHint ??
-                          'Describe your inbox rule in plain English or Vietnamese:',
+                      l10n?.describeRuleHint ?? 'Describe your inbox rule in plain English or Vietnamese:',
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
-                        color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                        color: isDark
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimaryLight,
                       ),
                     ),
                   ),
@@ -107,10 +114,13 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
               maxLines: 3,
               style: TextStyle(
                 fontSize: 14,
-                color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                color: isDark
+                    ? AppColors.textPrimaryDark
+                    : AppColors.textPrimaryLight,
               ),
               decoration: InputDecoration(
-                hintText: l10n?.ruleInputPlaceholder ??
+                hintText:
+                    l10n?.ruleInputPlaceholder ??
                     'e.g. Label all emails from substack.com as Newsletters',
                 alignLabelWithHint: true,
               ),
@@ -123,7 +133,9 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                color: isDark
+                    ? AppColors.textSecondaryDark
+                    : AppColors.textSecondaryLight,
               ),
             ),
             const SizedBox(height: AppSpacing.xs),
@@ -137,12 +149,19 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
                   },
                   borderRadius: AppRadius.roundedSm,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
-                      color: isDark ? AppColors.surfaceContainerDark : AppColors.surfaceLight,
+                      color: isDark
+                          ? AppColors.surfaceContainerDark
+                          : AppColors.surfaceLight,
                       borderRadius: AppRadius.roundedSm,
                       border: Border.all(
-                        color: isDark ? AppColors.outlineDark : AppColors.outlineLight,
+                        color: isDark
+                            ? AppColors.outlineDark
+                            : AppColors.outlineLight,
                         width: 1,
                       ),
                     ),
@@ -152,7 +171,9 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
                         Icon(
                           Icons.south_west_rounded,
                           size: 11,
-                          color: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+                          color: isDark
+                              ? AppColors.primaryDark
+                              : AppColors.primaryLight,
                         ),
                         const SizedBox(width: 5),
                         Text(
@@ -160,7 +181,9 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
                           style: TextStyle(
                             fontSize: 11.5,
                             fontWeight: FontWeight.w500,
-                            color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                            color: isDark
+                                ? AppColors.textSecondaryDark
+                                : AppColors.textSecondaryLight,
                           ),
                         ),
                       ],
@@ -183,9 +206,7 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
 
             if (rulesState.errorMessage != null) ...[
               const SizedBox(height: AppSpacing.md),
-              StatusBanner.error(
-                message: rulesState.errorMessage!,
-              ),
+              StatusBanner.error(message: rulesState.errorMessage!),
               if (isUnsupported) ...[
                 const SizedBox(height: AppSpacing.sm),
                 AppButton.outlined(
@@ -219,17 +240,20 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
                   Icon(
                     Icons.check_circle_outline_rounded,
                     size: 18,
-                    color: isDark ? AppColors.successDark : AppColors.successLight,
+                    color: isDark
+                        ? AppColors.successDark
+                        : AppColors.successLight,
                   ),
                   const SizedBox(width: AppSpacing.sm),
                   Text(
                     _generatedRules.length > 1
-                        ? (l10n?.multipleRulesGenerated(_generatedRules.length) ??
-                            'Separated into ${_generatedRules.length} independent rules')
+                        ? (l10n?.multipleRulesGenerated(
+                                _generatedRules.length,
+                              ) ??
+                              'Separated into ${_generatedRules.length} independent rules')
                         : (l10n?.generatedRulePreview ?? 'Generated Rule'),
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w700,
-                        ),
+                    style: Theme.of(context).textTheme.titleMedium
+                        ?.copyWith(fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
@@ -252,7 +276,9 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.bold,
-                              color: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+                              color: isDark
+                                  ? AppColors.primaryDark
+                                  : AppColors.primaryLight,
                             ),
                           ),
                         ),
@@ -262,9 +288,12 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
                       if (rule.isUncertain)
                         StatusBanner.warning(
                           margin: const EdgeInsets.only(bottom: AppSpacing.md),
-                          message: l10n?.uncertaintyWarning((rule.llmConfidence * 100).toInt()) ??
+                          message:
+                              l10n?.uncertaintyWarning(
+                                (rule.llmConfidence * 100).toInt(),
+                              ) ??
                               'Uncertain match (confidence: ${(rule.llmConfidence * 100).toInt()}%). '
-                              'Verify conditions before applying.',
+                                  'Verify conditions before applying.',
                         ),
 
                       AppCard(
@@ -283,7 +312,9 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 16,
-                                      color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                                      color: isDark
+                                          ? AppColors.textPrimaryDark
+                                          : AppColors.textPrimaryLight,
                                     ),
                                   ),
                                 ),
@@ -295,7 +326,9 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
                             AppBadge.provider(rule.llmProvider),
 
                             const Padding(
-                              padding: EdgeInsets.symmetric(vertical: AppSpacing.md),
+                              padding: EdgeInsets.symmetric(
+                                vertical: AppSpacing.md,
+                              ),
                               child: Divider(height: 1),
                             ),
 
@@ -305,7 +338,9 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
                               style: TextStyle(
                                 fontSize: 12.5,
                                 fontWeight: FontWeight.w700,
-                                color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                color: isDark
+                                    ? AppColors.textSecondaryDark
+                                    : AppColors.textSecondaryLight,
                               ),
                             ),
                             const SizedBox(height: AppSpacing.xs),
@@ -313,7 +348,11 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
                               spacing: 6,
                               runSpacing: 4,
                               children: rule.conditions.map((c) {
-                                return AppBadge.condition(c.field, c.operator, c.value);
+                                return AppBadge.condition(
+                                  c.field,
+                                  c.operator,
+                                  c.value,
+                                );
                               }).toList(),
                             ),
 
@@ -325,7 +364,9 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
                               style: TextStyle(
                                 fontSize: 12.5,
                                 fontWeight: FontWeight.w700,
-                                color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                color: isDark
+                                    ? AppColors.textSecondaryDark
+                                    : AppColors.textSecondaryLight,
                               ),
                             ),
                             const SizedBox(height: AppSpacing.xs),
@@ -345,9 +386,15 @@ class _RuleBuilderScreenState extends ConsumerState<RuleBuilderScreen> {
 
                             // Preview Action CTA
                             AppButton.primary(
-                              label: l10n?.previewAndApply ?? 'Preview Affected Emails',
-                              icon: const Icon(Icons.remove_red_eye_outlined, size: 18),
-                              onPressed: () => PreviewDialog.show(context, rule),
+                              label:
+                                  l10n?.previewAndApply ??
+                                  'Preview Affected Emails',
+                              icon: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                size: 18,
+                              ),
+                              onPressed: () =>
+                                  PreviewDialog.show(context, rule),
                             ),
                           ],
                         ),

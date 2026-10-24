@@ -28,8 +28,12 @@ class AppCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = backgroundColor ?? (isDark ? AppColors.surfaceDark : AppColors.surfaceLight);
-    final border = borderColor ?? (isDark ? AppColors.outlineDark : AppColors.outlineLight);
+    final bg =
+        backgroundColor ??
+        (isDark ? AppColors.surfaceDark : AppColors.surfaceLight);
+    final border =
+        borderColor ??
+        (isDark ? AppColors.outlineDark : AppColors.outlineLight);
 
     final cardWidget = Container(
       margin: margin,
@@ -39,10 +43,7 @@ class AppCard extends StatelessWidget {
         border: Border.all(color: border, width: 1),
         boxShadow: hasShadow ? AppShadows.card(context) : null,
       ),
-      child: Padding(
-        padding: padding,
-        child: child,
-      ),
+      child: Padding(padding: padding, child: child),
     );
 
     if (onTap != null) {

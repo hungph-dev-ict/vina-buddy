@@ -24,13 +24,15 @@ class ClassifiedMatchModel {
       emailId: json['email_id'] as String? ?? '',
       subject: json['subject'] as String? ?? '',
       fromEmail: json['from_email'] as String? ?? '',
-      proposedActions: (json['proposed_actions'] as List<dynamic>?)
+      proposedActions:
+          (json['proposed_actions'] as List<dynamic>?)
               ?.map((e) => RuleActionModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       confidence: (json['confidence'] as num?)?.toDouble() ?? 1.0,
       isUncertain: json['is_uncertain'] as bool? ?? false,
-      matchedConditions: (json['matched_conditions'] as List<dynamic>?)
+      matchedConditions:
+          (json['matched_conditions'] as List<dynamic>?)
               ?.map((e) => e.toString())
               .toList() ??
           [],
@@ -59,9 +61,11 @@ class PreviewModel {
     return PreviewModel(
       ruleId: json['rule_id'] as String? ?? '',
       ruleName: json['rule_name'] as String? ?? '',
-      matches: (json['matches'] as List<dynamic>?)
-              ?.map((e) =>
-                  ClassifiedMatchModel.fromJson(e as Map<String, dynamic>))
+      matches:
+          (json['matches'] as List<dynamic>?)
+              ?.map(
+                (e) => ClassifiedMatchModel.fromJson(e as Map<String, dynamic>),
+              )
               .toList() ??
           [],
       totalMatches: json['total_matches'] as int? ?? 0,

@@ -1,8 +1,8 @@
-# Smart Inbox AI — UI/UX Design Guidelines
+# Vina Buddy — UI/UX Design Guidelines
 
 ## 1. Product Vision & Design Philosophy
 
-Smart Inbox AI is a personal email management companion that bridges natural-language AI intent with safe, deterministic inbox triage. The design philosophy centers on **Transparency, Trust, Calm Productivity, and Intentionality**.
+Vina Buddy is a personal email management companion that bridges natural-language AI intent with safe, deterministic inbox triage. The design philosophy centers on **Transparency, Trust, Calm Productivity, and Intentionality**.
 
 ### Core Tenets
 1. **Trust Over Automation**: Users never feel that AI is silently making changes behind their back. Every action is previewed, categorized, and explicitly approved.
@@ -18,7 +18,7 @@ The mobile application follows a streamlined 3-tab hub structure optimized for t
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│                   Smart Inbox AI                       │
+│                      Vina Buddy                        │
 ├────────────────────────────────────────────────────────┤
 │                                                        │
 │  [1. Inbox Feed]    [2. AI Rule Builder]  [3. My Rules]│

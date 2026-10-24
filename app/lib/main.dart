@@ -7,13 +7,11 @@ import 'package:smart_inbox_ai/theme/app_theme.dart';
 import 'package:smart_inbox_ai/screens/auth_screen.dart';
 import 'package:smart_inbox_ai/screens/main_navigation_screen.dart';
 
+final GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    const ProviderScope(
-      child: SmartInboxApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: SmartInboxApp()));
 }
 
 class SmartInboxApp extends ConsumerWidget {
@@ -23,8 +21,10 @@ class SmartInboxApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authProvider);
     final locale = ref.watch(localeProvider);
+    final themeMode = ref.watch(themeModeProvider);
 
     return MaterialApp(
+      navigatorKey: appNavigatorKey,
       title: AppConstants.appName,
       onGenerateTitle: (context) =>
           AppLocalizations.of(context)?.appName ?? AppConstants.appName,
@@ -34,11 +34,21 @@ class SmartInboxApp extends ConsumerWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      home: authState.isAuthenticated
-          ? const MainNavigationScreen()
-          : const AuthScreen(),
+      themeMode: themeMode,
+      onGenerateRoute: (routeSettings) {
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (context) => authState.isAuthenticated
+              ? const MainNavigationScreen()
+              : const AuthScreen(),
+        );
+      },
+      home: KeyedSubtree(
+        key: ValueKey(authState.isAuthenticated),
+        child: authState.isAuthenticated
+            ? const MainNavigationScreen()
+            : const AuthScreen(),
+      ),
     );
   }
 }
-

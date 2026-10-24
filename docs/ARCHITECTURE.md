@@ -1,4 +1,4 @@
-# Smart Inbox AI — Architecture
+# Vina Buddy — Architecture
 
 ## 1. High-Level Architecture
 

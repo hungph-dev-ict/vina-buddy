@@ -32,10 +32,10 @@ void main() {
         'name': 'Newsletters',
         'natural_language': 'Label newsletters',
         'conditions': [
-          {'field': 'from', 'operator': 'contains', 'value': 'newsletter'}
+          {'field': 'from', 'operator': 'contains', 'value': 'newsletter'},
         ],
         'actions': [
-          {'type': 'add_label', 'label': 'Newsletters'}
+          {'type': 'add_label', 'label': 'Newsletters'},
         ],
         'priority': 1,
         'enabled': true,
@@ -70,12 +70,13 @@ void main() {
       final json = {
         'id': 'rule_1',
         'name': 'TLDR to Spam',
-        'natural_language': 'emails from tldr are spam and emails from GitHub are source code',
+        'natural_language':
+            'emails from tldr are spam and emails from GitHub are source code',
         'conditions': [
-          {'field': 'from', 'operator': 'contains', 'value': 'tldr'}
+          {'field': 'from', 'operator': 'contains', 'value': 'tldr'},
         ],
         'actions': [
-          {'type': 'add_label', 'label': 'Spam'}
+          {'type': 'add_label', 'label': 'Spam'},
         ],
         'sub_rules': [
           {
@@ -83,12 +84,12 @@ void main() {
             'name': 'GitHub to Source Code',
             'natural_language': 'emails from tldr are spam and emails from GitHub are source code',
             'conditions': [
-              {'field': 'from', 'operator': 'contains', 'value': 'github'}
+              {'field': 'from', 'operator': 'contains', 'value': 'github'},
             ],
             'actions': [
-              {'type': 'add_label', 'label': 'Source Code'}
+              {'type': 'add_label', 'label': 'Source Code'},
             ],
-          }
+          },
         ],
       };
 
@@ -114,12 +115,12 @@ void main() {
             'subject': 'Subject',
             'from_email': 'sender@test.com',
             'proposed_actions': [
-              {'type': 'add_label', 'label': 'Shopping'}
+              {'type': 'add_label', 'label': 'Shopping'},
             ],
             'confidence': 0.95,
             'is_uncertain': false,
             'matched_conditions': ['from contains amazon'],
-          }
+          },
         ],
         'total_matches': 1,
         'total_emails_evaluated': 50,

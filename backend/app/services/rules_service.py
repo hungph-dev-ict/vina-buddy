@@ -29,7 +29,38 @@ class RulesService:
         )
         self._rules_store: Dict[str, RuleResponse] = {}
 
+    def create_direct_rule(
+        self,
+        name: str,
+        natural_language: str,
+        conditions: List[RuleCondition],
+        actions: List[RuleAction],
+        llm_confidence: float = 0.95,
+        llm_provider: str = "Ollama (qwen2.5:3b)",
+    ) -> RuleResponse:
+        """Create and store a validated rule directly without calling LLM."""
+        rule_id = f"rule_{uuid.uuid4().hex[:8]}"
+        now = datetime.now(timezone.utc).isoformat()
+        rule = RuleResponse(
+            id=rule_id,
+            name=name,
+            natural_language=natural_language,
+            conditions=conditions,
+            actions=actions,
+            priority=1,
+            enabled=True,
+            llm_confidence=llm_confidence,
+            llm_provider=llm_provider,
+            is_uncertain=False,
+            created_at=now,
+            updated_at=now,
+        )
+        self._rules_store[rule_id] = rule
+        logger.info("Direct rule created: id=%s name='%s'", rule_id, name)
+        return rule
+
     async def create_rule_from_text(self, request: CreateRuleRequest) -> RuleResponse:
+
         """
         Parse natural language into structured, validated rule(s).
         Enforces multi-intent separation, strict schema validation, and uncertainty flagging.

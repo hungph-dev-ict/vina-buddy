@@ -1,4 +1,4 @@
-# Smart Inbox AI — Architecture Decision Records
+# Vina Buddy — Architecture Decision Records
 
 ## ADR-001: Monorepo Structure
 **Status:** Proposed  

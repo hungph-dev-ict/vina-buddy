@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "=== Setting up Smart Inbox AI environment ==="
+echo "=== Setting up Vina Buddy environment ==="
 
 # Check Homebrew tools
 command -v /opt/homebrew/bin/flutter >/dev/null 2>&1 || { echo "Error: Flutter not found"; exit 1; }

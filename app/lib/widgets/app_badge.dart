@@ -46,7 +46,9 @@ class AppBadge extends StatelessWidget {
     final percent = (score * 100).toInt();
     return AppBadge(
       label: '$percent%',
-      icon: score >= 0.70 ? Icons.check_circle_outline : Icons.warning_amber_rounded,
+      icon: score >= 0.70
+          ? Icons.check_circle_outline
+          : Icons.warning_amber_rounded,
       variant: AppBadgeVariant.aiConfidence,
       confidence: score,
     );
@@ -77,40 +79,80 @@ class AppBadge extends StatelessWidget {
 
     switch (variant) {
       case AppBadgeVariant.addLabel:
-        bgColor = isDark ? AppColors.successContainerDark : AppColors.successContainerLight;
-        textColor = isDark ? AppColors.onSuccessContainerDark : AppColors.onSuccessContainerLight;
-        borderColor = isDark ? AppColors.successDark.withValues(alpha: 0.3) : AppColors.successLight.withValues(alpha: 0.3);
+        bgColor = isDark
+            ? AppColors.successContainerDark
+            : AppColors.successContainerLight;
+        textColor = isDark
+            ? AppColors.onSuccessContainerDark
+            : AppColors.onSuccessContainerLight;
+        borderColor = isDark
+            ? AppColors.successDark.withValues(alpha: 0.3)
+            : AppColors.successLight.withValues(alpha: 0.3);
         break;
       case AppBadgeVariant.removeLabel:
-        bgColor = isDark ? AppColors.errorContainerDark : AppColors.errorContainerLight;
-        textColor = isDark ? AppColors.onErrorContainerDark : AppColors.onErrorContainerLight;
-        borderColor = isDark ? AppColors.errorDark.withValues(alpha: 0.3) : AppColors.errorLight.withValues(alpha: 0.3);
+        bgColor = isDark
+            ? AppColors.errorContainerDark
+            : AppColors.errorContainerLight;
+        textColor = isDark
+            ? AppColors.onErrorContainerDark
+            : AppColors.onErrorContainerLight;
+        borderColor = isDark
+            ? AppColors.errorDark.withValues(alpha: 0.3)
+            : AppColors.errorLight.withValues(alpha: 0.3);
         break;
       case AppBadgeVariant.aiConfidence:
         final isHigh = (confidence ?? 1.0) >= 0.70;
         if (isHigh) {
-          bgColor = isDark ? AppColors.successContainerDark : AppColors.successContainerLight;
-          textColor = isDark ? AppColors.onSuccessContainerDark : AppColors.onSuccessContainerLight;
-          borderColor = isDark ? AppColors.successDark.withValues(alpha: 0.3) : AppColors.successLight.withValues(alpha: 0.3);
+          bgColor = isDark
+              ? AppColors.successContainerDark
+              : AppColors.successContainerLight;
+          textColor = isDark
+              ? AppColors.onSuccessContainerDark
+              : AppColors.onSuccessContainerLight;
+          borderColor = isDark
+              ? AppColors.successDark.withValues(alpha: 0.3)
+              : AppColors.successLight.withValues(alpha: 0.3);
         } else {
-          bgColor = isDark ? AppColors.warningContainerDark : AppColors.warningContainerLight;
-          textColor = isDark ? AppColors.onWarningContainerDark : AppColors.onWarningContainerLight;
-          borderColor = isDark ? AppColors.warningDark.withValues(alpha: 0.3) : AppColors.warningLight.withValues(alpha: 0.3);
+          bgColor = isDark
+              ? AppColors.warningContainerDark
+              : AppColors.warningContainerLight;
+          textColor = isDark
+              ? AppColors.onWarningContainerDark
+              : AppColors.onWarningContainerLight;
+          borderColor = isDark
+              ? AppColors.warningDark.withValues(alpha: 0.3)
+              : AppColors.warningLight.withValues(alpha: 0.3);
         }
         break;
       case AppBadgeVariant.aiProvider:
-        bgColor = isDark ? AppColors.aiAccentContainerDark : AppColors.aiAccentContainerLight;
-        textColor = isDark ? AppColors.onAiAccentContainerDark : AppColors.onAiAccentContainerLight;
-        borderColor = isDark ? AppColors.aiAccentDark.withValues(alpha: 0.3) : AppColors.aiAccentLight.withValues(alpha: 0.3);
+        bgColor = isDark
+            ? AppColors.aiAccentContainerDark
+            : AppColors.aiAccentContainerLight;
+        textColor = isDark
+            ? AppColors.onAiAccentContainerDark
+            : AppColors.onAiAccentContainerLight;
+        borderColor = isDark
+            ? AppColors.aiAccentDark.withValues(alpha: 0.3)
+            : AppColors.aiAccentLight.withValues(alpha: 0.3);
         break;
       case AppBadgeVariant.condition:
-        bgColor = isDark ? AppColors.primaryContainerDark : AppColors.primaryContainerLight;
-        textColor = isDark ? AppColors.onPrimaryContainerDark : AppColors.onPrimaryContainerLight;
-        borderColor = isDark ? AppColors.primaryDark.withValues(alpha: 0.3) : AppColors.primaryLight.withValues(alpha: 0.3);
+        bgColor = isDark
+            ? AppColors.primaryContainerDark
+            : AppColors.primaryContainerLight;
+        textColor = isDark
+            ? AppColors.onPrimaryContainerDark
+            : AppColors.onPrimaryContainerLight;
+        borderColor = isDark
+            ? AppColors.primaryDark.withValues(alpha: 0.3)
+            : AppColors.primaryLight.withValues(alpha: 0.3);
         break;
       case AppBadgeVariant.neutral:
-        bgColor = isDark ? AppColors.surfaceContainerDark : AppColors.surfaceContainerLight;
-        textColor = isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
+        bgColor = isDark
+            ? AppColors.surfaceContainerDark
+            : AppColors.surfaceContainerLight;
+        textColor = isDark
+            ? AppColors.textSecondaryDark
+            : AppColors.textSecondaryLight;
         borderColor = isDark ? AppColors.outlineDark : AppColors.outlineLight;
         break;
     }

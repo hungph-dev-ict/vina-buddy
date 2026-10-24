@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_inbox_ai/theme/app_colors.dart';
 import 'package:smart_inbox_ai/theme/app_spacing.dart';
 
-enum AppButtonVariant {
-  primary,
-  secondary,
-  outlined,
-  destructive,
-  text,
-}
+enum AppButtonVariant { primary, secondary, outlined, destructive, text }
 
 /// Production-ready button with unified heights, loading states, and typography.
 class AppButton extends StatelessWidget {
@@ -124,7 +118,9 @@ class AppButton extends StatelessWidget {
         button = ElevatedButton(
           onPressed: isLoading ? null : onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+            backgroundColor: isDark
+                ? AppColors.primaryDark
+                : AppColors.primaryLight,
             foregroundColor: isDark ? const Color(0xFF0B0F19) : Colors.white,
             elevation: 0,
             minimumSize: Size(isFullWidth ? double.infinity : 0, height),
@@ -139,8 +135,12 @@ class AppButton extends StatelessWidget {
         button = FilledButton.tonal(
           onPressed: isLoading ? null : onPressed,
           style: FilledButton.styleFrom(
-            backgroundColor: isDark ? AppColors.primaryContainerDark : AppColors.primaryContainerLight,
-            foregroundColor: isDark ? AppColors.onPrimaryContainerDark : AppColors.onPrimaryContainerLight,
+            backgroundColor: isDark
+                ? AppColors.primaryContainerDark
+                : AppColors.primaryContainerLight,
+            foregroundColor: isDark
+                ? AppColors.onPrimaryContainerDark
+                : AppColors.onPrimaryContainerLight,
             minimumSize: Size(isFullWidth ? double.infinity : 0, height),
             shape: RoundedRectangleBorder(borderRadius: AppRadius.roundedMd),
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -213,7 +213,9 @@ class AppButton extends StatelessWidget {
       case AppButtonVariant.primary:
         return isDark ? const Color(0xFF0B0F19) : Colors.white;
       case AppButtonVariant.secondary:
-        return isDark ? AppColors.onPrimaryContainerDark : AppColors.onPrimaryContainerLight;
+        return isDark
+            ? AppColors.onPrimaryContainerDark
+            : AppColors.onPrimaryContainerLight;
       case AppButtonVariant.outlined:
       case AppButtonVariant.text:
         return isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;

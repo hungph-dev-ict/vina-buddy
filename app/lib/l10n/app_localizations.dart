@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// No description provided for @appName.
   ///
   /// In en, this message translates to:
-  /// **'Smart Inbox AI'**
+  /// **'vnverse'**
   String get appName;
 
   /// No description provided for @authTagline.
@@ -589,6 +589,240 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rule #{index}'**
   String ruleIndex(int index);
+
+  /// No description provided for @filterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get filterAll;
+
+  /// No description provided for @filterUnread.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread'**
+  String get filterUnread;
+
+  /// No description provided for @filterLabeled.
+  ///
+  /// In en, this message translates to:
+  /// **'With Labels'**
+  String get filterLabeled;
+
+  /// No description provided for @filterStarred.
+  ///
+  /// In en, this message translates to:
+  /// **'Important'**
+  String get filterStarred;
+
+  /// No description provided for @newRuleAction.
+  ///
+  /// In en, this message translates to:
+  /// **'New Rule'**
+  String get newRuleAction;
+
+  /// No description provided for @assistantTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'VinaBuddy Assistant'**
+  String get assistantTitle;
+
+  /// No description provided for @assistantSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Email AI Companion'**
+  String get assistantSubtitle;
+
+  /// No description provided for @assistantWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello! I am VinaBuddy, your email AI assistant. I can help you with Email Statistics, Email Classification, and Auto-Labeling.'**
+  String get assistantWelcome;
+
+  /// No description provided for @actionStats.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Stats'**
+  String get actionStats;
+
+  /// No description provided for @actionClassify.
+  ///
+  /// In en, this message translates to:
+  /// **'Classify Emails'**
+  String get actionClassify;
+
+  /// No description provided for @actionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Label Emails'**
+  String get actionLabel;
+
+  /// No description provided for @chatInputHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask VinaBuddy to stats, classify, or label...'**
+  String get chatInputHint;
+
+  /// No description provided for @statsSummaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Inbox Overview'**
+  String get statsSummaryTitle;
+
+  /// No description provided for @totalEmails.
+  ///
+  /// In en, this message translates to:
+  /// **'Total emails'**
+  String get totalEmails;
+
+  /// No description provided for @unreadEmails.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread'**
+  String get unreadEmails;
+
+  /// No description provided for @topSenders.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Senders'**
+  String get topSenders;
+
+  /// No description provided for @categoriesOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categoriesOverview;
+
+  /// No description provided for @classificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart Classification'**
+  String get classificationTitle;
+
+  /// No description provided for @proposalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Labeling Proposal'**
+  String get proposalTitle;
+
+  /// No description provided for @approveAndApplyBtn.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve & Apply'**
+  String get approveAndApplyBtn;
+
+  /// No description provided for @appliedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Label applied successfully!'**
+  String get appliedSuccessfully;
+
+  /// No description provided for @navAssistant.
+  ///
+  /// In en, this message translates to:
+  /// **'Assistant'**
+  String get navAssistant;
+
+  /// No description provided for @navPersonal.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal'**
+  String get navPersonal;
+
+  /// No description provided for @personalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings & Profile'**
+  String get personalTitle;
+
+  /// No description provided for @accountSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Connected Account'**
+  String get accountSection;
+
+  /// No description provided for @statusSandbox.
+  ///
+  /// In en, this message translates to:
+  /// **'Dev / Sandbox Mode'**
+  String get statusSandbox;
+
+  /// No description provided for @statusConnected.
+  ///
+  /// In en, this message translates to:
+  /// **'Google OAuth Connected'**
+  String get statusConnected;
+
+  /// No description provided for @appearanceSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get appearanceSection;
+
+  /// No description provided for @themeMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Display Theme'**
+  String get themeMode;
+
+  /// No description provided for @themeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// No description provided for @languageSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get languageSection;
+
+  /// No description provided for @privacySection.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy & Security'**
+  String get privacySection;
+
+  /// No description provided for @privacySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Zero permanent storage • Read & label only • Explicit approval'**
+  String get privacySubtitle;
+
+  /// No description provided for @appVersionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Vina Buddy v1.0.0 (PoC)'**
+  String get appVersionLabel;
+
+  /// No description provided for @disconnectAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Log Out / Disconnect'**
+  String get disconnectAccount;
+
+  /// No description provided for @disconnectConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect Account?'**
+  String get disconnectConfirmTitle;
+
+  /// No description provided for @disconnectConfirmMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'You will be returned to the onboarding screen.'**
+  String get disconnectConfirmMsg;
 }
 
 class _AppLocalizationsDelegate

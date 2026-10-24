@@ -10,11 +10,11 @@ class AppLocalizationsVi extends AppLocalizations {
   AppLocalizationsVi([String locale = 'vi']) : super(locale);
 
   @override
-  String get appName => 'Smart Inbox AI';
+  String get appName => 'vnverse';
 
   @override
   String get authTagline =>
-      'Trợ lý phân loại Gmail cá nhân bằng quy tắc AI ngôn ngữ tự nhiên, gắn nhãn an toàn có người dùng phê duyệt.';
+      'Văn phòng ảo AI độc đáo dành riêng cho bạn. Đăng nhập để trở thành Giám đốc và chiêu mộ những nhân viên AI tài năng nhất!';
 
   @override
   String get zeroPermanentStorageTitle => 'Không lưu trữ vĩnh viễn';
@@ -293,4 +293,125 @@ class AppLocalizationsVi extends AppLocalizations {
   String ruleIndex(int index) {
     return 'Quy tắc #$index';
   }
+
+  @override
+  String get filterAll => 'Tất cả';
+
+  @override
+  String get filterUnread => 'Chưa đọc';
+
+  @override
+  String get filterLabeled => 'Có nhãn';
+
+  @override
+  String get filterStarred => 'Quan trọng';
+
+  @override
+  String get newRuleAction => 'Tạo quy tắc';
+
+  @override
+  String get assistantTitle => 'Trợ lý VinaBuddy';
+
+  @override
+  String get assistantSubtitle => 'Trợ lý Email Thông Minh';
+
+  @override
+  String get assistantWelcome =>
+      'Xin chào! Tôi là VinaBuddy, trợ lý AI quản lý Gmail của bạn. Tôi có thể hỗ trợ bạn Thống kê email, Phân loại danh mục và Gắn nhãn tự động.';
+
+  @override
+  String get actionStats => 'Thống kê email';
+
+  @override
+  String get actionClassify => 'Phân loại email';
+
+  @override
+  String get actionLabel => 'Gắn nhãn email';
+
+  @override
+  String get chatInputHint =>
+      'Hỏi VinaBuddy về thống kê, phân loại, gắn nhãn...';
+
+  @override
+  String get statsSummaryTitle => 'Tổng quan hộp thư';
+
+  @override
+  String get totalEmails => 'Tổng số email';
+
+  @override
+  String get unreadEmails => 'Chưa đọc';
+
+  @override
+  String get topSenders => 'Người gửi nhiều nhất';
+
+  @override
+  String get categoriesOverview => 'Danh mục phân bổ';
+
+  @override
+  String get classificationTitle => 'Phân loại thông minh';
+
+  @override
+  String get proposalTitle => 'Đề xuất gắn nhãn';
+
+  @override
+  String get approveAndApplyBtn => 'Phê duyệt & Áp dụng';
+
+  @override
+  String get appliedSuccessfully => 'Đã áp dụng nhãn thành công!';
+
+  @override
+  String get navAssistant => 'Trợ lý';
+
+  @override
+  String get navPersonal => 'Cá nhân';
+
+  @override
+  String get personalTitle => 'Cá nhân & Cài đặt';
+
+  @override
+  String get accountSection => 'Tài khoản liên kết';
+
+  @override
+  String get statusSandbox => 'Chế độ Thử nghiệm / Sandbox';
+
+  @override
+  String get statusConnected => 'Đã kết nối Google OAuth';
+
+  @override
+  String get appearanceSection => 'Giao diện';
+
+  @override
+  String get themeMode => 'Chủ đề hiển thị';
+
+  @override
+  String get themeSystem => 'Hệ thống';
+
+  @override
+  String get themeLight => 'Sáng';
+
+  @override
+  String get themeDark => 'Tối';
+
+  @override
+  String get languageSection => 'Ngôn ngữ';
+
+  @override
+  String get privacySection => 'Bảo mật & Quyền riêng tư';
+
+  @override
+  String get privacySubtitle =>
+      'Không lưu email vĩnh viễn • Chỉ đọc & gắn nhãn • Cần bạn phê duyệt';
+
+  @override
+  String get appVersionLabel => 'Vina Buddy v1.0.0 (Thử nghiệm)';
+
+  @override
+  String get disconnectAccount => 'Đăng xuất / Ngắt kết nối';
+
+  @override
+  String get disconnectConfirmTitle => 'Ngắt kết nối tài khoản?';
+
+  @override
+  String get disconnectConfirmMsg =>
+      'Bạn sẽ quay lại màn hình bắt đầu của ứng dụng.';
 }

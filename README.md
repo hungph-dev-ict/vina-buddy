@@ -1,4 +1,4 @@
-# Smart Inbox AI
+# Vina Buddy
 
 An Android proof-of-concept for AI-assisted Gmail inbox management using natural language rules.
 

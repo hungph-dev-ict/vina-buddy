@@ -1,8 +1,8 @@
-# Smart Inbox AI — Final Project Handoff Report
+# Vina Buddy — Final Project Handoff Report
 
 ## 1. Executive Summary
 
-**Smart Inbox AI** is an Android proof-of-concept application enabling personal Gmail users to manage their inboxes using natural-language rules. The system parses plain-English requests into validated structured rules, classifies recent email metadata, previews proposed label changes, and modifies Gmail labels **only upon explicit user approval**.
+**Vina Buddy** is an Android proof-of-concept application enabling personal Gmail users to manage their inboxes using natural-language rules. The system parses plain-English requests into validated structured rules, classifies recent email metadata, previews proposed label changes, and modifies Gmail labels **only upon explicit user approval**.
 
 All technical and security requirements have been fulfilled across the full stack:
 - **Zero Permanent Storage**: Email bodies and raw OAuth tokens are never logged or persisted.

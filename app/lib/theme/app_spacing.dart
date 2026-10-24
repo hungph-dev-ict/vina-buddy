@@ -26,7 +26,9 @@ class AppRadius {
   static const BorderRadius roundedMd = BorderRadius.all(Radius.circular(md));
   static const BorderRadius roundedLg = BorderRadius.all(Radius.circular(lg));
   static const BorderRadius roundedXl = BorderRadius.all(Radius.circular(xl));
-  static const BorderRadius roundedPill = BorderRadius.all(Radius.circular(pill));
+  static const BorderRadius roundedPill = BorderRadius.all(
+    Radius.circular(pill),
+  );
 }
 
 /// Centralized elevation & ambient shadow tokens.

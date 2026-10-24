@@ -1,4 +1,4 @@
-# Smart Inbox AI — User Stories & Acceptance Criteria
+# Vina Buddy — User Stories & Acceptance Criteria
 
 ## Epic 1: Gmail Connection
 

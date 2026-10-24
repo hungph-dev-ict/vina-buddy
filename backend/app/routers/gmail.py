@@ -40,8 +40,7 @@ async def sync_emails(
     access_token = None
     if session_token:
         try:
-            session = auth_service.get_valid_session(session_token)
-            access_token = session.get_access_token()
+            access_token = await auth_service.get_valid_access_token(session_token)
         except AuthExpiredError as exc:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
@@ -78,8 +77,7 @@ async def list_labels(
     access_token = None
     if session_token:
         try:
-            session = auth_service.get_valid_session(session_token)
-            access_token = session.get_access_token()
+            access_token = await auth_service.get_valid_access_token(session_token)
         except AuthExpiredError as exc:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,

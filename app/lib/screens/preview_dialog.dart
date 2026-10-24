@@ -89,7 +89,7 @@ class _PreviewDialogState extends ConsumerState<PreviewDialog> {
         content: Text(
           l10n?.confirmApplyContent(_selectedEmailIds.length) ??
               'Apply labels to ${_selectedEmailIds.length} approved email(s)?\n\n'
-              'No emails will be deleted or sent.',
+                  'No emails will be deleted or sent.',
         ),
         actions: [
           TextButton(
@@ -98,7 +98,10 @@ class _PreviewDialogState extends ConsumerState<PreviewDialog> {
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(ctx, true),
-            child: Text(l10n?.approveAndApply(_selectedEmailIds.length) ?? 'Approve & Apply'),
+            child: Text(
+              l10n?.approveAndApply(_selectedEmailIds.length) ??
+                  'Approve & Apply',
+            ),
           ),
         ],
       ),
@@ -150,13 +153,16 @@ class _PreviewDialogState extends ConsumerState<PreviewDialog> {
     final l10n = AppLocalizations.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final totalMatches = _preview?.totalMatches ?? 0;
-    final isAllSelected = _selectedEmailIds.length == totalMatches && totalMatches > 0;
+    final isAllSelected =
+        _selectedEmailIds.length == totalMatches && totalMatches > 0;
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.88,
       decoration: BoxDecoration(
         color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.xl)),
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(AppRadius.xl),
+        ),
         boxShadow: AppShadows.modal(context),
       ),
       child: Column(
@@ -168,7 +174,9 @@ class _PreviewDialogState extends ConsumerState<PreviewDialog> {
               width: 36,
               height: 4,
               decoration: BoxDecoration(
-                color: isDark ? AppColors.outlineDark : AppColors.outlineVariantLight,
+                color: isDark
+                    ? AppColors.outlineDark
+                    : AppColors.outlineVariantLight,
                 borderRadius: AppRadius.roundedPill,
               ),
             ),
@@ -176,7 +184,10 @@ class _PreviewDialogState extends ConsumerState<PreviewDialog> {
 
           // Header
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.lg,
+              vertical: AppSpacing.sm,
+            ),
             child: Row(
               children: [
                 Expanded(
@@ -185,7 +196,10 @@ class _PreviewDialogState extends ConsumerState<PreviewDialog> {
                     children: [
                       Text(
                         '${l10n?.previewTitle ?? "Preview"}: ${widget.rule.name}',
-                        style: const TextStyle(fontSize: 16.5, fontWeight: FontWeight.w700),
+                        style: const TextStyle(
+                          fontSize: 16.5,
+                          fontWeight: FontWeight.w700,
+                        ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -194,7 +208,9 @@ class _PreviewDialogState extends ConsumerState<PreviewDialog> {
                         '${_selectedEmailIds.length} of $totalMatches approved',
                         style: TextStyle(
                           fontSize: 12,
-                          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -204,7 +220,9 @@ class _PreviewDialogState extends ConsumerState<PreviewDialog> {
                 if (totalMatches > 0)
                   TextButton(
                     onPressed: _toggleSelectAll,
-                    style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
+                    style: TextButton.styleFrom(
+                      visualDensity: VisualDensity.compact,
+                    ),
                     child: Text(
                       isAllSelected
                           ? (l10n?.deselectAll ?? 'Deselect All')
@@ -212,7 +230,9 @@ class _PreviewDialogState extends ConsumerState<PreviewDialog> {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+                        color: isDark
+                            ? AppColors.primaryDark
+                            : AppColors.primaryLight,
                       ),
                     ),
                   ),
@@ -230,95 +250,117 @@ class _PreviewDialogState extends ConsumerState<PreviewDialog> {
             child: _loading
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+                      color: isDark
+                          ? AppColors.primaryDark
+                          : AppColors.primaryLight,
                     ),
                   )
                 : _error != null
-                    ? Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(AppSpacing.lg),
-                          child: StatusBanner.error(
-                            message: 'Error: $_error',
-                            actionLabel: 'Retry',
-                            onAction: _loadPreview,
-                          ),
-                        ),
-                      )
-                    : _preview == null || _preview!.matches.isEmpty
-                        ? EmptyStateView(
-                            icon: Icons.filter_list_off_rounded,
-                            title: l10n?.noEmailsMatched ?? 'No emails matched this rule.',
-                            subtitle: 'No emails in your synced inbox meet all rule conditions.',
-                          )
-                        : ListView.separated(
-                            padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
-                            itemCount: _preview!.matches.length,
-                            separatorBuilder: (context, index) => Divider(
-                              height: 1,
-                              color: isDark ? AppColors.outlineDark : AppColors.outlineLight,
-                            ),
-                            itemBuilder: (context, index) {
-                              final match = _preview!.matches[index];
-                              final isSelected = _selectedEmailIds.contains(match.emailId);
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppSpacing.lg),
+                      child: StatusBanner.error(
+                        message: 'Error: $_error',
+                        actionLabel: 'Retry',
+                        onAction: _loadPreview,
+                      ),
+                    ),
+                  )
+                : _preview == null || _preview!.matches.isEmpty
+                ? EmptyStateView(
+                    icon: Icons.filter_list_off_rounded,
+                    title:
+                        l10n?.noEmailsMatched ?? 'No emails matched this rule.',
+                    subtitle: 'No emails in your synced inbox meet all rule conditions.',
+                  )
+                : ListView.separated(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: AppSpacing.xs,
+                    ),
+                    itemCount: _preview!.matches.length,
+                    separatorBuilder: (context, index) => Divider(
+                      height: 1,
+                      color: isDark
+                          ? AppColors.outlineDark
+                          : AppColors.outlineLight,
+                    ),
+                    itemBuilder: (context, index) {
+                      final match = _preview!.matches[index];
+                      final isSelected = _selectedEmailIds.contains(
+                        match.emailId,
+                      );
 
-                              return CheckboxListTile(
-                                value: isSelected,
-                                activeColor: isDark ? AppColors.primaryDark : AppColors.primaryLight,
-                                controlAffinity: ListTileControlAffinity.leading,
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                                onChanged: (val) {
-                                  setState(() {
-                                    if (val == true) {
-                                      _selectedEmailIds.add(match.emailId);
-                                    } else {
-                                      _selectedEmailIds.remove(match.emailId);
-                                    }
-                                  });
-                                },
-                                title: Text(
-                                  match.subject,
-                                  style: TextStyle(
-                                    fontSize: 13.5,
-                                    fontWeight: FontWeight.w600,
-                                    color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                subtitle: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      match.fromEmail,
-                                      style: TextStyle(
-                                        fontSize: 11.5,
-                                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 6),
-                                    Wrap(
-                                      spacing: 4,
-                                      runSpacing: 4,
-                                      children: match.proposedActions.map((a) {
-                                        return AppBadge.addLabel(a.label);
-                                      }).toList(),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
+                      return CheckboxListTile(
+                        value: isSelected,
+                        activeColor: isDark
+                            ? AppColors.primaryDark
+                            : AppColors.primaryLight,
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 4,
+                        ),
+                        onChanged: (val) {
+                          setState(() {
+                            if (val == true) {
+                              _selectedEmailIds.add(match.emailId);
+                            } else {
+                              _selectedEmailIds.remove(match.emailId);
+                            }
+                          });
+                        },
+                        title: Text(
+                          match.subject,
+                          style: TextStyle(
+                            fontSize: 13.5,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? AppColors.textPrimaryDark
+                                : AppColors.textPrimaryLight,
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 2),
+                            Text(
+                              match.fromEmail,
+                              style: TextStyle(
+                                fontSize: 11.5,
+                                color: isDark
+                                    ? AppColors.textSecondaryDark
+                                    : AppColors.textSecondaryLight,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Wrap(
+                              spacing: 4,
+                              runSpacing: 4,
+                              children: match.proposedActions.map((a) {
+                                return AppBadge.addLabel(a.label);
+                              }).toList(),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
           ),
 
           // Bottom Action Bar
           Container(
             padding: const EdgeInsets.all(AppSpacing.lg),
             decoration: BoxDecoration(
-              color: isDark ? AppColors.surfaceContainerDark : AppColors.surfaceLight,
+              color: isDark
+                  ? AppColors.surfaceContainerDark
+                  : AppColors.surfaceLight,
               border: Border(
                 top: BorderSide(
-                  color: isDark ? AppColors.outlineDark : AppColors.outlineLight,
+                  color: isDark
+                      ? AppColors.outlineDark
+                      : AppColors.outlineLight,
                   width: 1,
                 ),
               ),
@@ -329,7 +371,7 @@ class _PreviewDialogState extends ConsumerState<PreviewDialog> {
                 label: _applying
                     ? (l10n?.applyingChanges ?? 'Applying changes...')
                     : (l10n?.approveAndApply(_selectedEmailIds.length) ??
-                        'Apply Actions (${_selectedEmailIds.length})'),
+                          'Apply Actions (${_selectedEmailIds.length})'),
                 isLoading: _applying,
                 icon: const Icon(Icons.check_circle_outline_rounded, size: 18),
                 onPressed: (_selectedEmailIds.isEmpty || _applying)

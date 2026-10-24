@@ -98,12 +98,15 @@ class MockFallbackProvider:
     def _parse_single_clause(self, text: str) -> Dict[str, Any] | None:
         # Pattern: label emails from <sender> as <label>
         match_from_as = re.search(
-            r"(?:label|move|tag|gán nhãn)?\s*(?:emails?|thư)?\s*(?:from|từ)\s+([a-zA-Z0-9_.-]+)\s+(?:as|to|are|is|with label|là|thành)\s+([a-zA-Z0-9_\s-]+)",
+            r"(?:label|move|tag|gán nhãn|gắn nhãn)?\s*(?:emails?|thư)?\s*(?:from|từ)\s+([^\s]+)\s+(?:as|to|are|is|with label|là|thành|vào nhãn)\s+([^\n\r]+)",
             text,
+            re.IGNORECASE | re.UNICODE,
         )
         if match_from_as:
             sender = match_from_as.group(1).strip()
-            label = match_from_as.group(2).strip().title()
+            label = match_from_as.group(2).strip()
+            # Clean trailing punctuation
+            label = re.sub(r"[.!?,;]+$", "", label).strip().capitalize()
             return {
                 "name": f"Label {sender}",
                 "conditions": [

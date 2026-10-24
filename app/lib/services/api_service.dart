@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:smart_inbox_ai/config/constants.dart';
 import 'package:smart_inbox_ai/models/email_item.dart';
 import 'package:smart_inbox_ai/models/health_status.dart';
 import 'package:smart_inbox_ai/models/preview_model.dart';
+import 'package:smart_inbox_ai/models/reminder_model.dart';
 import 'package:smart_inbox_ai/models/rule_model.dart';
 
 class ApiException implements Exception {
@@ -26,11 +29,12 @@ class ApiService {
   final http.Client _client;
   String? sessionToken;
 
-  ApiService({
-    String? baseUrl,
-    http.Client? client,
-  })  : baseUrl = (baseUrl ?? AppConstants.defaultApiBaseUrl).replaceAll(RegExp(r'/+$'), ''),
-        _client = client ?? http.Client();
+  ApiService({String? baseUrl, http.Client? client})
+    : baseUrl = (baseUrl ?? AppConstants.defaultApiBaseUrl).replaceAll(
+        RegExp(r'/+$'),
+        '',
+      ),
+      _client = client ?? http.Client();
 
   Map<String, String> _buildHeaders() {
     final headers = <String, String>{
@@ -47,7 +51,9 @@ class ApiService {
     final url = Uri.parse('$baseUrl/api/v1/health');
     final res = await _client.get(url, headers: _buildHeaders());
     if (res.statusCode == 200) {
-      return HealthStatus.fromJson(jsonDecode(res.body) as Map<String, dynamic>);
+      return HealthStatus.fromJson(
+        jsonDecode(res.body) as Map<String, dynamic>,
+      );
     }
     throw ApiException(
       statusCode: res.statusCode,
@@ -63,10 +69,7 @@ class ApiService {
     final res = await _client.post(
       url,
       headers: _buildHeaders(),
-      body: jsonEncode({
-        'auth_code': authCode,
-        'redirect_uri': redirectUri,
-      }),
+      body: jsonEncode({'auth_code': authCode, 'redirect_uri': redirectUri}),
     );
 
     if (res.statusCode == 200) {
@@ -80,6 +83,72 @@ class ApiService {
       statusCode: res.statusCode,
       code: errorBody['code'] ?? 'AUTH_FAILED',
       message: errorBody['message'] ?? 'Authentication failed',
+    );
+  }
+
+  Future<Map<String, dynamic>> getGoogleAuthUrl({
+    String? serverHost,
+    String? redirectUri,
+  }) async {
+    final uri = Uri.parse('$baseUrl/api/v1/auth/google/url').replace(
+      queryParameters: {
+        if (serverHost != null && serverHost.isNotEmpty)
+          'server_host': serverHost,
+        if (redirectUri != null && redirectUri.isNotEmpty)
+          'redirect_uri': redirectUri,
+      },
+    );
+    final res = await _client.get(uri, headers: _buildHeaders());
+    if (res.statusCode == 200) {
+      return jsonDecode(res.body) as Map<String, dynamic>;
+    }
+    final errorBody = _parseErrorBody(res.body);
+    throw ApiException(
+      statusCode: res.statusCode,
+      code: errorBody['code'] ?? 'URL_FAILED',
+      message: errorBody['message'] ?? 'Failed to get Google Auth URL',
+    );
+  }
+
+  Future<void> saveGoogleConfig({
+    required String clientId,
+    required String clientSecret,
+  }) async {
+    final url = Uri.parse('$baseUrl/api/v1/auth/google/config');
+    final res = await _client.post(
+      url,
+      headers: _buildHeaders(),
+      body: jsonEncode({
+        'client_id': clientId.trim(),
+        'client_secret': clientSecret.trim(),
+      }),
+    );
+    if (res.statusCode != 200) {
+      final errorBody = _parseErrorBody(res.body);
+      throw ApiException(
+        statusCode: res.statusCode,
+        code: errorBody['code'] ?? 'CONFIG_FAILED',
+        message: errorBody['message'] ?? 'Failed to save Google configuration',
+      );
+    }
+  }
+
+  Future<Map<String, dynamic>> pollGoogleAuth({required String state}) async {
+    final uri = Uri.parse('$baseUrl/api/v1/auth/google/poll')
+        .replace(queryParameters: {'state': state});
+    final res = await _client.get(uri, headers: _buildHeaders());
+    if (res.statusCode == 200) {
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      if (data['status'] == 'completed' && data['session_token'] != null) {
+        sessionToken = data['session_token'] as String?;
+      }
+      return data;
+    }
+    final errorBody = _parseErrorBody(res.body);
+    throw ApiException(
+      statusCode: res.statusCode,
+      code: errorBody['code'] ?? 'POLL_FAILED',
+      message: errorBody['message'] ?? 'Failed to poll login status',
     );
   }
 
@@ -181,7 +250,9 @@ class ApiService {
     );
 
     if (res.statusCode == 200) {
-      return PreviewModel.fromJson(jsonDecode(res.body) as Map<String, dynamic>);
+      return PreviewModel.fromJson(
+        jsonDecode(res.body) as Map<String, dynamic>,
+      );
     }
 
     final errorBody = _parseErrorBody(res.body);
@@ -209,7 +280,8 @@ class ApiService {
     if (res.statusCode == 200) {
       final data = jsonDecode(res.body) as Map<String, dynamic>;
       return ApplySummaryModel.fromJson(
-          data['summary'] as Map<String, dynamic>);
+        data['summary'] as Map<String, dynamic>,
+      );
     }
 
     final errorBody = _parseErrorBody(res.body);
@@ -247,6 +319,142 @@ class ApiService {
       statusCode: res.statusCode,
       code: errorBody['code'] ?? 'REPORT_ERROR',
       message: errorBody['message'] ?? 'Failed to submit report',
+    );
+  }
+
+  Future<Map<String, dynamic>> sendAssistantMessage({
+    required String message,
+    String locale = 'vi',
+    String? sessionId,
+    String? agentId,
+  }) async {
+    final url = Uri.parse('$baseUrl/api/v1/assistant/chat');
+    final payload = <String, dynamic>{'message': message, 'locale': locale};
+    if (agentId != null) {
+      payload['agent_id'] = agentId;
+    }
+    if (sessionId != null) {
+      payload['session_id'] = sessionId;
+    }
+    try {
+      final res = await _client
+          .post(url, headers: _buildHeaders(), body: jsonEncode(payload))
+          .timeout(const Duration(seconds: 15));
+
+      if (res.statusCode == 200) {
+        return jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
+      }
+
+      final errorBody = _parseErrorBody(res.body);
+      throw ApiException(
+        statusCode: res.statusCode,
+        code: errorBody['code'] ?? 'ASSISTANT_ERROR',
+        message: errorBody['message'] ?? 'Failed to chat with assistant',
+      );
+    } on TimeoutException {
+      throw ApiException(
+        statusCode: 408,
+        code: 'TIMEOUT',
+        message: 'Không thể kết nối đến máy chủ backend (quá thời gian chờ 15s). Vui lòng kiểm tra lại server!',
+      );
+    }
+  }
+
+  Future<List<AgentReminder>> getAgentReminders(String agentId) async {
+    final url = Uri.parse('$baseUrl/api/v1/agents/$agentId/reminders');
+    final res = await _client.get(url, headers: _buildHeaders());
+    if (res.statusCode == 200) {
+      final data = jsonDecode(utf8.decode(res.bodyBytes)) as List<dynamic>;
+      return data
+          .map((e) => AgentReminder.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+    final errorBody = _parseErrorBody(res.body);
+    throw ApiException(
+      statusCode: res.statusCode,
+      code: errorBody['code'] ?? 'REMINDER_FETCH_ERROR',
+      message: errorBody['message'] ?? 'Failed to fetch agent reminders',
+    );
+  }
+
+  Future<AgentReminder> createAgentReminder(
+    String agentId,
+    Map<String, dynamic> data,
+  ) async {
+    final url = Uri.parse('$baseUrl/api/v1/agents/$agentId/reminders');
+    final res = await _client.post(
+      url,
+      headers: _buildHeaders(),
+      body: jsonEncode(data),
+    );
+    if (res.statusCode == 201) {
+      return AgentReminder.fromJson(
+        jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>,
+      );
+    }
+    final errorBody = _parseErrorBody(res.body);
+    throw ApiException(
+      statusCode: res.statusCode,
+      code: errorBody['code'] ?? 'REMINDER_CREATE_ERROR',
+      message: errorBody['message'] ?? 'Failed to create agent reminder',
+    );
+  }
+
+  Future<AgentReminder> updateAgentReminder(
+    String reminderId, {
+    bool? isEnabled,
+    String? targetTime,
+    String? occasion,
+  }) async {
+    final url = Uri.parse('$baseUrl/api/v1/reminders/$reminderId');
+    final payload = <String, dynamic>{
+      'is_enabled': ?isEnabled,
+      'target_time': ?targetTime,
+      'occasion': ?occasion,
+    };
+    final res = await _client.patch(
+      url,
+      headers: _buildHeaders(),
+      body: jsonEncode(payload),
+    );
+    if (res.statusCode == 200) {
+      return AgentReminder.fromJson(
+        jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>,
+      );
+    }
+    final errorBody = _parseErrorBody(res.body);
+    throw ApiException(
+      statusCode: res.statusCode,
+      code: errorBody['code'] ?? 'REMINDER_UPDATE_ERROR',
+      message: errorBody['message'] ?? 'Failed to update reminder',
+    );
+  }
+
+  Future<void> deleteAgentReminder(String reminderId) async {
+    final url = Uri.parse('$baseUrl/api/v1/reminders/$reminderId');
+    final res = await _client.delete(url, headers: _buildHeaders());
+    if (res.statusCode == 204 || res.statusCode == 200) {
+      return;
+    }
+    final errorBody = _parseErrorBody(res.body);
+    throw ApiException(
+      statusCode: res.statusCode,
+      code: errorBody['code'] ?? 'REMINDER_DELETE_ERROR',
+      message: errorBody['message'] ?? 'Failed to delete reminder',
+    );
+  }
+
+  Future<Map<String, dynamic>> testRunAgentReminder(String reminderId) async {
+    final url = Uri.parse('$baseUrl/api/v1/reminders/$reminderId/test-run');
+    final res = await _client.post(url, headers: _buildHeaders());
+    if (res.statusCode == 200) {
+      return jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
+    }
+    final errorBody = _parseErrorBody(res.body);
+    throw ApiException(
+      statusCode: res.statusCode,
+      code: errorBody['code'] ?? 'REMINDER_TEST_RUN_ERROR',
+      message: errorBody['message'] ?? 'Failed to execute test run',
     );
   }
 

@@ -10,7 +10,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appName => 'Smart Inbox AI';
+  String get appName => 'vnverse';
 
   @override
   String get authTagline =>
@@ -291,4 +291,124 @@ class AppLocalizationsEn extends AppLocalizations {
   String ruleIndex(int index) {
     return 'Rule #$index';
   }
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get filterUnread => 'Unread';
+
+  @override
+  String get filterLabeled => 'With Labels';
+
+  @override
+  String get filterStarred => 'Important';
+
+  @override
+  String get newRuleAction => 'New Rule';
+
+  @override
+  String get assistantTitle => 'VinaBuddy Assistant';
+
+  @override
+  String get assistantSubtitle => 'Email AI Companion';
+
+  @override
+  String get assistantWelcome =>
+      'Hello! I am VinaBuddy, your email AI assistant. I can help you with Email Statistics, Email Classification, and Auto-Labeling.';
+
+  @override
+  String get actionStats => 'Email Stats';
+
+  @override
+  String get actionClassify => 'Classify Emails';
+
+  @override
+  String get actionLabel => 'Label Emails';
+
+  @override
+  String get chatInputHint => 'Ask VinaBuddy to stats, classify, or label...';
+
+  @override
+  String get statsSummaryTitle => 'Inbox Overview';
+
+  @override
+  String get totalEmails => 'Total emails';
+
+  @override
+  String get unreadEmails => 'Unread';
+
+  @override
+  String get topSenders => 'Top Senders';
+
+  @override
+  String get categoriesOverview => 'Categories';
+
+  @override
+  String get classificationTitle => 'Smart Classification';
+
+  @override
+  String get proposalTitle => 'Labeling Proposal';
+
+  @override
+  String get approveAndApplyBtn => 'Approve & Apply';
+
+  @override
+  String get appliedSuccessfully => 'Label applied successfully!';
+
+  @override
+  String get navAssistant => 'Assistant';
+
+  @override
+  String get navPersonal => 'Personal';
+
+  @override
+  String get personalTitle => 'Settings & Profile';
+
+  @override
+  String get accountSection => 'Connected Account';
+
+  @override
+  String get statusSandbox => 'Dev / Sandbox Mode';
+
+  @override
+  String get statusConnected => 'Google OAuth Connected';
+
+  @override
+  String get appearanceSection => 'Appearance';
+
+  @override
+  String get themeMode => 'Display Theme';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get languageSection => 'Language';
+
+  @override
+  String get privacySection => 'Privacy & Security';
+
+  @override
+  String get privacySubtitle =>
+      'Zero permanent storage • Read & label only • Explicit approval';
+
+  @override
+  String get appVersionLabel => 'Vina Buddy v1.0.0 (PoC)';
+
+  @override
+  String get disconnectAccount => 'Log Out / Disconnect';
+
+  @override
+  String get disconnectConfirmTitle => 'Disconnect Account?';
+
+  @override
+  String get disconnectConfirmMsg =>
+      'You will be returned to the onboarding screen.';
 }

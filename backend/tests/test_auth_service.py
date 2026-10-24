@@ -96,3 +96,48 @@ def test_revoke_session_purges_tokens(auth_service):
 
     with pytest.raises(AuthExpiredError):
         auth_service.get_valid_session(token)
+
+
+def test_google_auth_url_configured_behavior(auth_service):
+    """Generates valid OAuth consent URL when configured, or configured=False when empty."""
+    from app.config import settings
+
+    orig_id = settings.GOOGLE_CLIENT_ID
+    orig_secret = settings.GOOGLE_CLIENT_SECRET
+    try:
+        # When unconfigured
+        settings.GOOGLE_CLIENT_ID = ""
+        settings.GOOGLE_CLIENT_SECRET = ""
+        res_unconf = auth_service.get_google_auth_url("http://localhost:8000/callback")
+        assert res_unconf["configured"] is False
+
+        # When configured in-memory
+        settings.GOOGLE_CLIENT_ID = "test-client-id.apps.googleusercontent.com"
+        settings.GOOGLE_CLIENT_SECRET = "test-secret"
+        res_conf = auth_service.get_google_auth_url("http://localhost:8000/callback")
+        assert res_conf["configured"] is True
+        assert "accounts.google.com" in res_conf["auth_url"]
+        assert "test-client-id" in res_conf["auth_url"]
+        assert res_conf["state"] is not None
+
+        # Test state polling
+        state = res_conf["state"]
+        poll_initial = auth_service.poll_pending_auth(state)
+        assert poll_initial["status"] == "pending"
+
+        # Simulate completed login via callback
+        auth_service._pending_auth[state] = {
+            "status": "completed",
+            "session_token": "sess_12345",
+            "email": "realuser@gmail.com",
+        }
+        poll_after = auth_service.poll_pending_auth(state)
+        assert poll_after["status"] == "completed"
+        assert poll_after["email"] == "realuser@gmail.com"
+    finally:
+        settings.GOOGLE_CLIENT_ID = orig_id
+        settings.GOOGLE_CLIENT_SECRET = orig_secret
+
+
+
+

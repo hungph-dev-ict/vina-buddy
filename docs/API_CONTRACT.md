@@ -1,4 +1,4 @@
-# Smart Inbox AI — API Contract
+# Vina Buddy — API Contract
 
 ## Base URL
 ```

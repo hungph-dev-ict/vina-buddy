@@ -43,7 +43,9 @@ class _RulesScreenState extends ConsumerState<RulesScreen> {
                     height: 18,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      color: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+                      color: isDark
+                          ? AppColors.primaryDark
+                          : AppColors.primaryLight,
                     ),
                   )
                 : const Icon(Icons.refresh_rounded),
@@ -60,97 +62,117 @@ class _RulesScreenState extends ConsumerState<RulesScreen> {
               ),
             )
           : rulesState.rules.isEmpty
-              ? EmptyStateView(
-                  icon: Icons.rule_folder_outlined,
-                  title: l10n?.noRulesConfigured ?? 'No rules configured yet.',
-                  subtitle: l10n?.noRulesSubtitle ?? 'Create your first rule using plain English.',
-                  buttonLabel: l10n?.createRuleButton ?? 'Create Rule',
-                  onButtonPressed: widget.onNavigateToBuilder,
-                )
-              : Column(
-                  children: [
-                    // Status bar
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: isDark ? AppColors.surfaceContainerDark : AppColors.surfaceContainerLight,
-                        border: Border(
-                          bottom: BorderSide(
-                            color: isDark ? AppColors.outlineDark : AppColors.outlineLight,
-                            width: 1,
-                          ),
+          ? EmptyStateView(
+              icon: Icons.rule_folder_outlined,
+              title: l10n?.noRulesConfigured ?? 'No rules configured yet.',
+              subtitle:
+                  l10n?.noRulesSubtitle ??
+                  'Create your first rule using plain English.',
+              buttonLabel: l10n?.createRuleButton ?? 'Create Rule',
+              onButtonPressed: widget.onNavigateToBuilder,
+            )
+          : Column(
+              children: [
+                // Status bar
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.lg,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? AppColors.surfaceContainerDark
+                        : AppColors.surfaceContainerLight,
+                    border: Border(
+                      bottom: BorderSide(
+                        color: isDark
+                            ? AppColors.outlineDark
+                            : AppColors.outlineLight,
+                        width: 1,
+                      ),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.tune_rounded,
+                        size: 15,
+                        color: isDark
+                            ? AppColors.primaryDark
+                            : AppColors.primaryLight,
+                      ),
+                      const SizedBox(width: AppSpacing.sm),
+                      Text(
+                        '${rulesState.rules.where((r) => r.enabled).length} of ${rulesState.rules.length} active',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: isDark
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight,
                         ),
                       ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.tune_rounded,
-                            size: 15,
-                            color: isDark ? AppColors.primaryDark : AppColors.primaryLight,
-                          ),
-                          const SizedBox(width: AppSpacing.sm),
-                          Text(
-                            '${rulesState.rules.where((r) => r.enabled).length} of ${rulesState.rules.length} active',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        padding: const EdgeInsets.all(AppSpacing.md),
-                        itemCount: rulesState.rules.length,
-                        itemBuilder: (context, index) {
-                          final rule = rulesState.rules[index];
-                          return RuleCard(
-                            rule: rule,
-                            previewLabel: l10n?.previewRule ?? 'Preview',
-                            deleteTooltip: l10n?.deleteRule ?? 'Delete Rule',
-                            onToggle: (val) {
-                              ref.read(rulesProvider.notifier).toggleRule(rule.id, val);
-                            },
-                            onPreview: () => PreviewDialog.show(context, rule),
-                            onDelete: () async {
-                              final confirm = await showDialog<bool>(
-                                context: context,
-                                builder: (ctx) => AlertDialog(
-                                  title: Text(l10n?.deleteRuleConfirmTitle ?? 'Delete Rule'),
-                                  content: Text(
-                                    l10n?.deleteRuleConfirmContent ??
-                                        'Are you sure you want to delete this rule?',
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(ctx, false),
-                                      child: Text(l10n?.cancel ?? 'Cancel'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(ctx, true),
-                                      child: Text(
-                                        l10n?.delete ?? 'Delete',
-                                        style: TextStyle(
-                                          color: isDark ? AppColors.errorDark : AppColors.errorLight,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                              if (confirm == true) {
-                                ref.read(rulesProvider.notifier).deleteRule(rule.id);
-                              }
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(AppSpacing.md),
+                    itemCount: rulesState.rules.length,
+                    itemBuilder: (context, index) {
+                      final rule = rulesState.rules[index];
+                      return RuleCard(
+                        rule: rule,
+                        previewLabel: l10n?.previewRule ?? 'Preview',
+                        deleteTooltip: l10n?.deleteRule ?? 'Delete Rule',
+                        onToggle: (val) {
+                          ref
+                              .read(rulesProvider.notifier)
+                              .toggleRule(rule.id, val);
+                        },
+                        onPreview: () => PreviewDialog.show(context, rule),
+                        onDelete: () async {
+                          final confirm = await showDialog<bool>(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: Text(
+                                l10n?.deleteRuleConfirmTitle ?? 'Delete Rule',
+                              ),
+                              content: Text(
+                                l10n?.deleteRuleConfirmContent ?? 'Are you sure you want to delete this rule?',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(ctx, false),
+                                  child: Text(l10n?.cancel ?? 'Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(ctx, true),
+                                  child: Text(
+                                    l10n?.delete ?? 'Delete',
+                                    style: TextStyle(
+                                      color: isDark
+                                          ? AppColors.errorDark
+                                          : AppColors.errorLight,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                          if (confirm == true) {
+                            ref
+                                .read(rulesProvider.notifier)
+                                .deleteRule(rule.id);
+                          }
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }

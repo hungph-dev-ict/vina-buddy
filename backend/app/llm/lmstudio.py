@@ -97,3 +97,27 @@ class LMStudioProvider:
             raise LLMValidationError(f"Invalid JSON from LM Studio: {exc}") from exc
         except Exception as exc:
             raise LLMValidationError(f"Error parsing LM Studio response: {exc}") from exc
+
+    async def _send_prompt(self, prompt: str) -> str:
+        """Send direct prompt to LM Studio and return raw text response."""
+        payload = {
+            "model": self.model,
+            "messages": [
+                {"role": "user", "content": prompt},
+            ],
+            "temperature": 0.1,
+        }
+        try:
+            async with httpx.AsyncClient(timeout=self.timeout) as client:
+                res = await client.post(
+                    f"{self.base_url}/chat/completions",
+                    json=payload,
+                    headers={"Content-Type": "application/json"},
+                )
+                if res.status_code == 200:
+                    data = res.json()
+                    return data["choices"][0]["message"]["content"].strip()
+                raise LLMProviderError(f"LM Studio error HTTP {res.status_code}")
+        except Exception as exc:
+            raise LLMProviderError(f"LM Studio prompt error: {exc}") from exc
+

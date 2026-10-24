@@ -1,6 +1,6 @@
-# Smart Inbox AI — Backend
+# Vina Buddy — Backend
 
-FastAPI backend service for Smart Inbox AI.
+FastAPI backend service for Vina Buddy.
 
 ## Quickstart
 

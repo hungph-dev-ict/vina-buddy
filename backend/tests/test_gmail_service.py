@@ -135,3 +135,14 @@ async def test_destructive_actions_strictly_blocked_by_security_guardrail():
             rule_id=malicious_rule.id,
             approved_email_ids=["email_news_001"],
         )
+
+
+def test_real_google_token_classification(test_setup):
+    """Accurately distinguishes mock/session tokens from genuine Google tokens."""
+    gmail_svc, _ = test_setup
+    assert not gmail_svc._is_real_google_token(None)
+    assert not gmail_svc._is_real_google_token("mock_access_12345")
+    assert not gmail_svc._is_real_google_token("sess_safe_token_abc")
+    assert gmail_svc._is_real_google_token("ya29.a0ARrdaM-example-google-token")
+    assert gmail_svc._is_real_google_token("google_oauth_token_xyz")
+

@@ -1,7 +1,7 @@
 import logging
 import re
 import time
-from typing import List
+from typing import Any, List, Optional
 
 from app.fixtures.synthetic_emails import SyntheticEmail, get_synthetic_emails
 from app.schemas.classification import ClassifiedMatch, PreviewResponse
@@ -54,15 +54,20 @@ class ClassificationService:
                 return False
         return False
 
-    def preview_rule(self, rule: RuleResponse) -> PreviewResponse:
+    def preview_rule(
+        self,
+        rule: RuleResponse,
+        emails: Optional[List[Any]] = None,
+    ) -> PreviewResponse:
         """
-        Evaluate rule against synthetic email set and return preview with proposed actions.
+        Evaluate rule against emails (real metadata or synthetic set) and return preview with proposed actions.
         Enforces privacy: NEVER logs email bodies. Logs only email IDs.
         """
         start_time = time.perf_counter()
         matches: List[ClassifiedMatch] = []
+        target_emails = emails if emails is not None else self.emails
 
-        for email in self.emails:
+        for email in target_emails:
             matched_conditions = []
             for cond in rule.conditions:
                 if self.evaluate_condition(cond, email):
@@ -89,7 +94,7 @@ class ClassificationService:
             "Rule preview evaluated: rule_id=%s matches=%d/%d elapsed_ms=%d",
             rule.id,
             len(matches),
-            len(self.emails),
+            len(target_emails),
             elapsed_ms,
         )
 
@@ -98,7 +103,7 @@ class ClassificationService:
             rule_name=rule.name,
             matches=matches,
             total_matches=len(matches),
-            total_emails_evaluated=len(self.emails),
+            total_emails_evaluated=len(target_emails),
             evaluation_time_ms=elapsed_ms,
             provider_used=rule.llm_provider,
         )

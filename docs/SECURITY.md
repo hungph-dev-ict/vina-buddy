@@ -1,4 +1,4 @@
-# Smart Inbox AI — Security Plan
+# Vina Buddy — Security Plan
 
 ## 1. Threat Model
 

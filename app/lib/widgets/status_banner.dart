@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_inbox_ai/theme/app_colors.dart';
 import 'package:smart_inbox_ai/theme/app_spacing.dart';
 
-enum StatusBannerType {
-  info,
-  warning,
-  error,
-  success,
-}
+enum StatusBannerType { info, warning, error, success }
 
 /// Semantic banner for alerts, uncertainty warnings, and sync failure recovery.
 class StatusBanner extends StatelessWidget {
@@ -66,27 +61,51 @@ class StatusBanner extends StatelessWidget {
 
     switch (type) {
       case StatusBannerType.info:
-        bgColor = isDark ? AppColors.primaryContainerDark : AppColors.primaryContainerLight;
-        borderColor = isDark ? AppColors.primaryDark.withValues(alpha: 0.3) : AppColors.primaryLight.withValues(alpha: 0.3);
-        textColor = isDark ? AppColors.onPrimaryContainerDark : AppColors.onPrimaryContainerLight;
+        bgColor = isDark
+            ? AppColors.primaryContainerDark
+            : AppColors.primaryContainerLight;
+        borderColor = isDark
+            ? AppColors.primaryDark.withValues(alpha: 0.3)
+            : AppColors.primaryLight.withValues(alpha: 0.3);
+        textColor = isDark
+            ? AppColors.onPrimaryContainerDark
+            : AppColors.onPrimaryContainerLight;
         iconData = Icons.info_outline_rounded;
         break;
       case StatusBannerType.warning:
-        bgColor = isDark ? AppColors.warningContainerDark : AppColors.warningContainerLight;
-        borderColor = isDark ? AppColors.warningDark.withValues(alpha: 0.4) : AppColors.warningLight.withValues(alpha: 0.4);
-        textColor = isDark ? AppColors.onWarningContainerDark : AppColors.onWarningContainerLight;
+        bgColor = isDark
+            ? AppColors.warningContainerDark
+            : AppColors.warningContainerLight;
+        borderColor = isDark
+            ? AppColors.warningDark.withValues(alpha: 0.4)
+            : AppColors.warningLight.withValues(alpha: 0.4);
+        textColor = isDark
+            ? AppColors.onWarningContainerDark
+            : AppColors.onWarningContainerLight;
         iconData = Icons.warning_amber_rounded;
         break;
       case StatusBannerType.error:
-        bgColor = isDark ? AppColors.errorContainerDark : AppColors.errorContainerLight;
-        borderColor = isDark ? AppColors.errorDark.withValues(alpha: 0.4) : AppColors.errorLight.withValues(alpha: 0.4);
-        textColor = isDark ? AppColors.onErrorContainerDark : AppColors.onErrorContainerLight;
+        bgColor = isDark
+            ? AppColors.errorContainerDark
+            : AppColors.errorContainerLight;
+        borderColor = isDark
+            ? AppColors.errorDark.withValues(alpha: 0.4)
+            : AppColors.errorLight.withValues(alpha: 0.4);
+        textColor = isDark
+            ? AppColors.onErrorContainerDark
+            : AppColors.onErrorContainerLight;
         iconData = Icons.error_outline_rounded;
         break;
       case StatusBannerType.success:
-        bgColor = isDark ? AppColors.successContainerDark : AppColors.successContainerLight;
-        borderColor = isDark ? AppColors.successDark.withValues(alpha: 0.4) : AppColors.successLight.withValues(alpha: 0.4);
-        textColor = isDark ? AppColors.onSuccessContainerDark : AppColors.onSuccessContainerLight;
+        bgColor = isDark
+            ? AppColors.successContainerDark
+            : AppColors.successContainerLight;
+        borderColor = isDark
+            ? AppColors.successDark.withValues(alpha: 0.4)
+            : AppColors.successLight.withValues(alpha: 0.4);
+        textColor = isDark
+            ? AppColors.onSuccessContainerDark
+            : AppColors.onSuccessContainerLight;
         iconData = Icons.check_circle_outline_rounded;
         break;
     }

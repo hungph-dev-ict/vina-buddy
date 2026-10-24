@@ -23,7 +23,10 @@ class LanguageSelectorAction extends ConsumerWidget {
                 const SizedBox(width: 4),
                 Text(
                   currentLocale.languageCode.toUpperCase(),
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
                 ),
               ],
             )

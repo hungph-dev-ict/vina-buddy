@@ -4,8 +4,12 @@ import 'package:smart_inbox_ai/theme/app_colors.dart';
 /// Centralized TextTheme configurations for Light and Dark modes.
 class AppTypography {
   static TextTheme createTextTheme({required bool isDark}) {
-    final primary = isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
-    final secondary = isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
+    final primary = isDark
+        ? AppColors.textPrimaryDark
+        : AppColors.textPrimaryLight;
+    final secondary = isDark
+        ? AppColors.textSecondaryDark
+        : AppColors.textSecondaryLight;
 
     return TextTheme(
       displayLarge: TextStyle(

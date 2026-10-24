@@ -18,20 +18,17 @@ class RuleConditionModel {
   }
 
   Map<String, dynamic> toJson() => {
-        'field': field,
-        'operator': operator,
-        'value': value,
-      };
+    'field': field,
+    'operator': operator,
+    'value': value,
+  };
 }
 
 class RuleActionModel {
   final String type;
   final String label;
 
-  const RuleActionModel({
-    required this.type,
-    required this.label,
-  });
+  const RuleActionModel({required this.type, required this.label});
 
   factory RuleActionModel.fromJson(Map<String, dynamic> json) {
     return RuleActionModel(
@@ -40,10 +37,7 @@ class RuleActionModel {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'type': type,
-        'label': label,
-      };
+  Map<String, dynamic> toJson() => {'type': type, 'label': label};
 }
 
 class RuleModel {
@@ -80,12 +74,15 @@ class RuleModel {
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? 'Custom Rule',
       naturalLanguage: json['natural_language'] as String? ?? '',
-      conditions: (json['conditions'] as List<dynamic>?)
-              ?.map((e) =>
-                  RuleConditionModel.fromJson(e as Map<String, dynamic>))
+      conditions:
+          (json['conditions'] as List<dynamic>?)
+              ?.map(
+                (e) => RuleConditionModel.fromJson(e as Map<String, dynamic>),
+              )
               .toList() ??
           [],
-      actions: (json['actions'] as List<dynamic>?)
+      actions:
+          (json['actions'] as List<dynamic>?)
               ?.map((e) => RuleActionModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
@@ -95,7 +92,8 @@ class RuleModel {
       llmProvider: json['llm_provider'] as String? ?? 'ollama',
       isUncertain: json['is_uncertain'] as bool? ?? false,
       createdAt: json['created_at'] as String? ?? '',
-      subRules: (json['sub_rules'] as List<dynamic>?)
+      subRules:
+          (json['sub_rules'] as List<dynamic>?)
               ?.map((e) => RuleModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
@@ -119,4 +117,3 @@ class RuleModel {
     );
   }
 }
-

@@ -68,8 +68,10 @@ class _AdminReportDialogState extends ConsumerState<AdminReportDialog> {
     return AlertDialog(
       title: Row(
         children: [
-          Icon(Icons.report_problem_outlined,
-              color: Theme.of(context).colorScheme.primary),
+          Icon(
+            Icons.report_problem_outlined,
+            color: Theme.of(context).colorScheme.primary,
+          ),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
@@ -85,8 +87,7 @@ class _AdminReportDialogState extends ConsumerState<AdminReportDialog> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              l10n?.reportToAdminDesc ??
-                  'This request is not currently supported. You can send a report to the admin for manual review.',
+              l10n?.reportToAdminDesc ?? 'This request is not currently supported. You can send a report to the admin for manual review.',
               style: TextStyle(fontSize: 13, color: Colors.grey[700]),
             ),
             const SizedBox(height: 12),
@@ -106,7 +107,10 @@ class _AdminReportDialogState extends ConsumerState<AdminReportDialog> {
               ),
               child: Text(
                 widget.userInput,
-                style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
             ),
             const SizedBox(height: 12),
@@ -121,10 +125,13 @@ class _AdminReportDialogState extends ConsumerState<AdminReportDialog> {
               controller: _notesController,
               maxLines: 2,
               decoration: InputDecoration(
-                hintText: l10n?.reportNotesHint ??
+                hintText:
+                    l10n?.reportNotesHint ??
                     'Describe what you need or why you requested this...',
                 hintStyle: TextStyle(fontSize: 12, color: Colors.grey[400]),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 contentPadding: const EdgeInsets.all(10),
               ),
             ),

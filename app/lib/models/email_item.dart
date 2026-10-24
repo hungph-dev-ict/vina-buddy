@@ -30,7 +30,8 @@ class EmailItem {
       subject: json['subject'] as String? ?? '',
       snippet: json['snippet'] as String? ?? '',
       date: json['date'] as String? ?? '',
-      labels: (json['labels'] as List<dynamic>?)
+      labels:
+          (json['labels'] as List<dynamic>?)
               ?.map((e) => e.toString())
               .toList() ??
           [],
@@ -39,14 +40,14 @@ class EmailItem {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'thread_id': threadId,
-        'from_email': fromEmail,
-        'from_name': fromName,
-        'subject': subject,
-        'snippet': snippet,
-        'date': date,
-        'labels': labels,
-        'has_attachments': hasAttachments,
-      };
+    'id': id,
+    'thread_id': threadId,
+    'from_email': fromEmail,
+    'from_name': fromName,
+    'subject': subject,
+    'snippet': snippet,
+    'date': date,
+    'labels': labels,
+    'has_attachments': hasAttachments,
+  };
 }

@@ -53,8 +53,12 @@ class RuleCard extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: rule.enabled
-                            ? (isDark ? AppColors.successDark : AppColors.successLight)
-                            : (isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
+                            ? (isDark
+                                  ? AppColors.successDark
+                                  : AppColors.successLight)
+                            : (isDark
+                                  ? AppColors.textMutedDark
+                                  : AppColors.textMutedLight),
                       ),
                     ),
                     const SizedBox(width: AppSpacing.sm),
@@ -65,8 +69,12 @@ class RuleCard extends StatelessWidget {
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                           color: rule.enabled
-                              ? (isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight)
-                              : (isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight),
+                              ? (isDark
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimaryLight)
+                              : (isDark
+                                    ? AppColors.textSecondaryDark
+                                    : AppColors.textSecondaryLight),
                         ),
                       ),
                     ),
@@ -76,7 +84,9 @@ class RuleCard extends StatelessWidget {
               Switch(
                 value: rule.enabled,
                 onChanged: onToggle,
-                activeTrackColor: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+                activeTrackColor: isDark
+                    ? AppColors.primaryDark
+                    : AppColors.primaryLight,
               ),
             ],
           ),
@@ -86,11 +96,15 @@ class RuleCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
-              color: isDark ? AppColors.surfaceContainerDark : AppColors.surfaceContainerLight,
+              color: isDark
+                  ? AppColors.surfaceContainerDark
+                  : AppColors.surfaceContainerLight,
               borderRadius: AppRadius.roundedSm,
               border: Border(
                 left: BorderSide(
-                  color: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+                  color: isDark
+                      ? AppColors.primaryDark
+                      : AppColors.primaryLight,
                   width: 3,
                 ),
               ),
@@ -100,7 +114,9 @@ class RuleCard extends StatelessWidget {
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 fontSize: 12,
-                color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                color: isDark
+                    ? AppColors.textSecondaryDark
+                    : AppColors.textSecondaryLight,
                 height: 1.35,
               ),
             ),
@@ -131,11 +147,16 @@ class RuleCard extends StatelessWidget {
                   icon: const Icon(Icons.remove_red_eye_outlined, size: 16),
                   label: Text(
                     previewLabel,
-                    style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   style: TextButton.styleFrom(
                     visualDensity: VisualDensity.compact,
-                    foregroundColor: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+                    foregroundColor: isDark
+                        ? AppColors.primaryDark
+                        : AppColors.primaryLight,
                   ),
                 ),
               const SizedBox(width: AppSpacing.sm),

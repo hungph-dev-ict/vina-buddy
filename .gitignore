@@ -90,6 +90,7 @@ docker-compose.override.yml
 # Runtime Data & Storage
 # =========================
 backend/data/*.jsonl
+backend/.*_store.json
 *.sqlite
 *.sqlite3
 *.db

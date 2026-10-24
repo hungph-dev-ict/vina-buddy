@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Centralized semantic color tokens for Smart Inbox AI.
+/// Centralized semantic color tokens for Vina Buddy.
 class AppColors {
   // Brand & Primary
   static const Color primaryLight = Color(0xFF3B5CE6);
@@ -35,6 +35,8 @@ class AppColors {
   // Semantic Status Colors
   static const Color successLight = Color(0xFF059669);
   static const Color successDark = Color(0xFF10B981);
+  static const Color emerald = Color(0xFF10B981);
+  static const Color amber = Color(0xFFF59E0B);
   static const Color successContainerLight = Color(0xFFECFDF5);
   static const Color successContainerDark = Color(0xFF064E3B);
   static const Color onSuccessContainerLight = Color(0xFF065F46);

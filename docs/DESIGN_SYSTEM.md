@@ -1,8 +1,8 @@
-# Smart Inbox AI — Flutter Design System
+# Vina Buddy — Flutter Design System
 
 ## 1. Overview & Architecture
 
-The Smart Inbox AI Design System provides a centralized, reusable set of design tokens and UI components built on Material 3 principles. It ensures visual consistency, accessibility compliance, and coherent dark/light mode switching across the entire application.
+The Vina Buddy Design System provides a centralized, reusable set of design tokens and UI components built on Material 3 principles. It ensures visual consistency, accessibility compliance, and coherent dark/light mode switching across the entire application.
 
 ### Directory Structure
 ```
