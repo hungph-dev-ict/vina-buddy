@@ -52,10 +52,17 @@ async def get_google_auth_url(
     from app.config import settings
 
     if not redirect_uri:
-        if settings.GOOGLE_REDIRECT_URI and "callback" in settings.GOOGLE_REDIRECT_URI:
+        if server_host:
+            host = server_host.strip().rstrip("/")
+            if host.startswith("0.0.0.0"):
+                host = "192.168.1.109:8000"
+            scheme = "https" if "ngrok" in host or "trycloudflare" in host or host.startswith("https") else "http"
+            host_clean = host.replace("http://", "").replace("https://", "")
+            redirect_uri = f"{scheme}://{host_clean}/api/v1/auth/google/callback"
+        elif settings.GOOGLE_REDIRECT_URI and "callback" in settings.GOOGLE_REDIRECT_URI and "trycloudflare" not in settings.GOOGLE_REDIRECT_URI:
             redirect_uri = settings.GOOGLE_REDIRECT_URI
         else:
-            host = server_host or f"{settings.HOST}:{settings.PORT}"
+            host = f"{settings.HOST}:{settings.PORT}"
             if host.startswith("0.0.0.0"):
                 host = "192.168.1.109:8000"
             scheme = "https" if "ngrok" in host or "trycloudflare" in host else "http"
